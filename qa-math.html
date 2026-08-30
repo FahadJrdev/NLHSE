@@ -33,6 +33,62 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         panels spend more time here than on the thesis itself.
       </p>
 
+      <section class="plain">
+        <p class="plain-label">In plain words</p>
+        <p>
+          These questions step one pace away from your thesis. The purpose is to find out whether
+          you learned a <em>subject</em> or learned a <em>calculation</em> — because a research
+          student will be handed problems that are not their thesis, and the panel needs to know
+          you can move.
+        </p>
+
+        <h3>The four ideas everything here rests on</h3>
+        <ul>
+          <li>
+            <strong>PDEs come in three flavours.</strong> Elliptic ones describe things that have
+            settled down — the shape of a soap film, heat spread evenly over a plate. Parabolic
+            ones describe smoothing and spreading, like heat flowing. Hyperbolic ones describe
+            <em>waves</em>: things that travel, with a front and a finite speed. Yours is
+            hyperbolic, and that is exactly why direction matters in it.
+          </li>
+          <li>
+            <strong>Dispersion is not diffusion.</strong> Both make a pulse spread out, and they
+            are completely different. Diffusion damps it — the pulse fades away and the energy is
+            gone. Dispersion just rearranges it — the pulse smears but keeps all its energy,
+            because the components have merely drifted apart. The single letter <em>i</em> in the
+            Schrödinger equation is what turns one into the other.
+          </li>
+          <li>
+            <strong>A soliton is a balance, not a shape.</strong> Spreading pulls one way,
+            nonlinearity pulls the other, and when they cancel the pulse survives intact. The
+            strict definition also demands that two of them can collide and come out unchanged —
+            which is a much stronger claim, and one your project did not test.
+          </li>
+          <li>
+            <strong>Fractional derivatives are about memory.</strong> An ordinary derivative only
+            looks at a point's immediate neighbourhood. A genuinely fractional one integrates over
+            the entire history. That is why they turn up in materials that creep, and in diffusion
+            that does not follow the usual rules.
+          </li>
+        </ul>
+
+        <h3>The bridge they are really probing</h3>
+        <p>
+          If the group is computational, the questions will drift toward how you would
+          <em>compute</em> this rather than solve it by hand. The honest and strong answer is that
+          exact solutions like yours are what numerical methods get <strong>tested against</strong>.
+          A solver is only trustworthy if you can point it at a problem whose answer is already
+          known exactly and show that it agrees. Most equations have no such benchmark. Yours
+          does — you produced it.
+        </p>
+        <p class="aside">
+          Where you have not used a method, say so in one sentence and then say what you have
+          used. "I know the weak formulation but I've not implemented a finite-element solver" is
+          a completely respectable answer. Bluffing is the only genuinely bad option, and it is
+          always obvious.
+        </p>
+      </section>
+
       <div class="qa-toolbar">
         <input class="search" data-search type="search" placeholder="Filter questions…" aria-label="Filter questions">
         <button class="btn" type="button" data-quiz>Quiz mode</button>

@@ -33,6 +33,66 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         scientific computing rather than to web development. These questions do that.
       </p>
 
+      <section class="plain">
+        <p class="plain-label">In plain words</p>
+        <p>
+          You have six years of professional software experience, which most mathematics
+          graduates applying for the same positions do not. That is an advantage — but only if
+          you connect it to <strong>scientific</strong> computing rather than to web development,
+          because a supervisor hearing "Laravel and REST APIs" will not automatically hear
+          anything useful to them.
+        </p>
+
+        <h3>What actually transfers</h3>
+        <p>
+          Not the frameworks. What transfers is <em>discipline</em>, and research code is
+          notoriously short of it. Most scientific software is written once by one person, never
+          tested, never version-controlled properly, and cannot be run by anyone else a year
+          later. You already know how to avoid all of that, and supervisors who have been burned
+          by it know exactly how much it is worth.
+        </p>
+
+        <h3>The one idea that makes numerical testing make sense</h3>
+        <p>
+          In ordinary software you test by checking the output equals the expected value. In
+          numerical work the answer is never exactly right, so that does not work. Instead you
+          test <em>properties</em>:
+        </p>
+        <ul>
+          <li>
+            <strong>Does the error shrink at the right rate?</strong> Halve the step size; if the
+            method is second-order the error should drop by a factor of four. If it drops by two,
+            something is wrong even though every individual answer looks plausible. This one test
+            catches whole categories of bug that no single run can.
+          </li>
+          <li>
+            <strong>Are the conserved quantities staying conserved?</strong> The equation preserves
+            certain totals. If your simulation's totals drift, you have a bug — and you can check
+            it every single step, for free.
+          </li>
+          <li>
+            <strong>Does it agree with a case you know exactly?</strong> This is where your project
+            earns its place: your formulas <em>are</em> such a case.
+          </li>
+        </ul>
+
+        <h3>The story worth telling</h3>
+        <p>
+          You wrote your thesis solutions as code, substituted them back into the equation to see
+          what was left over, found the residual was far too large, narrowed it down by checking
+          each piece separately, and located a wrong constant in your own published report. That
+          is a debugging story with a method and a definite outcome. It demonstrates more than any
+          claim about being a fast learner could.
+        </p>
+        <p class="aside">
+          On languages: say exactly what is true. Maple for the symbolic work, Python with NumPy
+          and matplotlib now, six years of professional web stacks. If you have never written
+          MATLAB or Fortran, say so — and note that they are close enough to NumPy in style that
+          the move is days, not months. That is a fair claim. Claiming you already know them is
+          not.
+        </p>
+      </section>
+
       <div class="qa-toolbar">
         <input class="search" data-search type="search" placeholder="Filter questions…" aria-label="Filter questions">
         <button class="btn" type="button" data-quiz>Quiz mode</button>

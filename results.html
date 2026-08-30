@@ -33,6 +33,66 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         set and the single claim it supports.
       </p>
 
+      <section class="plain">
+        <p class="plain-label">In plain words</p>
+        <p>
+          You have an exact formula for a wave. A formula on its own tells you very little —
+          you cannot look at it and see what the wave does. So you plug in numbers and draw
+          pictures, and you change one setting at a time to see what each one controls. That is
+          all Chapter 4 is: eleven pictures, each answering "what happens if I turn this dial?"
+        </p>
+
+        <h3>The dials, and what each one does</h3>
+        <ul>
+          <li>
+            <strong>θ — the angle the wave travels at.</strong> Turn it up and the wave gets
+            shorter and wider. It trades height for width. In your Figure 6 the peak drops from
+            about 1.85 to 0.65 as the angle goes from 10° to 30°.
+          </li>
+          <li>
+            <strong>β — the fractional order.</strong> This one is the interesting result.
+            Changing β stretches or squashes the wave <em>sideways</em> and leaves its height
+            completely alone. And that is not a coincidence you observed — it is forced. β only
+            ever appears inside the definition of the travelling coordinate, and never in the
+            constant that sets the amplitude. It is mathematically incapable of changing the
+            height. Figure 9 is that fact made visible: three curves, different spacing,
+            identical peaks.
+          </li>
+          <li>
+            <strong>χ — which family you are in.</strong> Negative gives you a wave with a single
+            feature in it; positive gives you an endlessly repeating one. One sign flip, two
+            completely different pictures.
+          </li>
+          <li>
+            <strong>t — time.</strong> The whole shape just slides sideways without changing.
+            That is what "travelling wave" means, and Figure 11 is the cleanest demonstration of
+            it in the report.
+          </li>
+        </ul>
+
+        <h3>About the spikes in Figure 1</h3>
+        <p>
+          The obvious reading is that the solution blows up there. It doesn't — and the reason
+          is worth knowing, because it is the kind of detail that separates having drawn a graph
+          from having understood it. The formula is a fraction, and its bottom does hit zero at
+          one point. But its <em>top</em> hits zero at exactly the same point, and the two
+          cancel. Like sin(x)/x at zero, it looks undefined and is actually perfectly
+          well-behaved.
+        </p>
+        <p>
+          So where do the spikes come from? From the coordinate change, not the wave. The new
+          coordinate involves raising (x + something) to a fractional power. Once x goes far
+          enough negative that the bracket turns negative, you are taking a fractional power of a
+          negative number, and the result stops being a real number. Every figure with spikes in
+          it is plotted well into that region. <strong>The spikes are an artefact of how far the
+          plotting range was extended, not a feature of the physics.</strong>
+        </p>
+        <p class="aside">
+          Which is a criticism of your own report — and one you are much better off making
+          yourself than having made to you.
+        </p>
+      </section>
+
       <nav class="jump">
         <a href="#base">Base profiles</a>
         <a href="#oblique">Obliqueness</a>

@@ -32,6 +32,78 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         This is Chapter 2 of your report, stated generally, before it meets your equation.
       </p>
 
+      <section class="plain">
+        <p class="plain-label">In plain words</p>
+        <p>
+          Nobody can solve a nonlinear PDE in general. There is no formula, and there never will
+          be. So methods like this one do something more modest and much more practical:
+          <strong>guess the shape of the answer, leave blanks in the guess, and let the equation
+          fill the blanks in.</strong>
+        </p>
+        <p>
+          That is the whole idea. Everything below is the machinery for making the guess precise
+          enough that the equation <em>can</em> fill it in.
+        </p>
+
+        <h3>The four moves</h3>
+        <ol>
+          <li>
+            <strong>Ride along with the wave.</strong> Assume the answer is a fixed shape moving
+            at constant speed. Then instead of three variables (x, y, t) you have one — how far
+            along the wave you are. A partial differential equation becomes an ordinary one, and
+            ordinary ones are enormously easier.
+          </li>
+          <li>
+            <strong>Write the answer as a short recipe.</strong> Guess that the shape is built
+            out of one simple building-block function, called δ, combined a few ways: some of δ,
+            some of 1 over δ, plus a constant. The amounts are unknown — those are the blanks.
+          </li>
+          <li>
+            <strong>Substitute and compare.</strong> Put the guess into the equation. Because
+            the building block was chosen so that its derivative is expressible in terms of
+            itself, everything collapses into a polynomial in δ. A polynomial is zero only if
+            every coefficient is zero — so you get one equation per power of δ. Blanks become a
+            system of ordinary algebra.
+          </li>
+          <li>
+            <strong>Solve the algebra.</strong> No calculus left. Hand it to Maple, get numbers
+            back, put the numbers into the guess. Done.
+          </li>
+        </ol>
+
+        <h3>Why δ is chosen so carefully</h3>
+        <p>
+          δ satisfies δ′ = δ² + χ — its slope is expressible using only δ itself. That is the
+          entire trick. It means you can differentiate your guess as many times as you like and
+          <strong>never produce a new kind of function</strong>. Everything stays a polynomial in
+          δ, so "compare the coefficients" is a finite, well-defined thing to do. Choose a
+          building block without that property and the method jams immediately.
+        </p>
+
+        <h3>Why the answer splits into two families</h3>
+        <p>
+          The little equation for δ has a constant χ in it, and its solution looks completely
+          different depending on whether χ is negative or positive — cosh and sinh in one case,
+          cos and sin in the other. So one calculation hands you two kinds of wave: a localised
+          one and a repeating one. That is where your U<sub>τ</sub> and U<sub>υ</sub> come from.
+        </p>
+
+        <h3>Why N = 1 and not something else</h3>
+        <p>
+          The recipe could in principle be long — δ, δ², δ³ and so on. It has to stop somewhere,
+          and where it stops is not a matter of taste. You count how fast each side of the
+          equation grows: differentiating twice pushes the power up by two, while cubing pushes
+          it up threefold. The only length at which those match is one term. So the recipe is
+          short, and that is forced, not chosen.
+        </p>
+        <p class="aside">
+          The honest limitation: this finds solutions of the shape you assumed. It does not tell
+          you they are the only ones, whether they are stable, or what happens for initial
+          conditions of a different shape. What it does give — exact formulas, with no
+          approximation anywhere — is rare enough to be worth having.
+        </p>
+      </section>
+
       <nav class="jump">
         <a href="#s1">Step 1 — transform</a>
         <a href="#s2">Step 2 — the ansatz</a>

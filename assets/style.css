@@ -331,6 +331,39 @@ code {
 .say p { font-family: var(--serif); font-size: var(--fs-base); line-height: 1.65; font-style: italic; margin-bottom: .6rem; }
 .say p:last-child { margin-bottom: 0; }
 
+/* ---------- "in plain words" ----------
+   The read-this-first block at the top of every page: the same idea as the
+   section below it, said without jargon. Deliberately warmer and wider-set
+   than body text so the eye lands on it before the mathematics. */
+.plain {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--accent-2) 26%, var(--border));
+  border-left: 3px solid var(--accent-2);
+  border-radius: var(--radius);
+  padding: var(--sp-5);
+  margin: 0 0 var(--sp-6);
+  box-shadow: var(--shadow);
+}
+.plain-label {
+  font-family: var(--mono); font-size: var(--fs-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .12em; color: var(--accent-2);
+  margin: 0 0 var(--sp-3); display: flex; align-items: center; gap: .55rem;
+}
+.plain-label::after { content: ""; flex: 1; height: 1px; background: color-mix(in srgb, var(--accent-2) 25%, transparent); }
+.plain p { font-size: var(--fs-base); line-height: 1.78; margin-bottom: var(--sp-4); }
+.plain > :last-child { margin-bottom: 0; }
+.plain h3 {
+  font-family: var(--sans); font-weight: 700; font-size: var(--fs-ms);
+  letter-spacing: .01em; margin: var(--sp-5) 0 var(--sp-2); color: var(--text);
+}
+.plain ul, .plain ol { margin-bottom: var(--sp-4); }
+.plain li { line-height: 1.7; }
+.plain .aside {
+  font-size: var(--fs-sm); color: var(--text-dim); line-height: 1.65;
+  border-top: 1px dashed color-mix(in srgb, var(--accent-2) 30%, transparent);
+  padding-top: var(--sp-3); margin-top: var(--sp-4);
+}
+
 /* ---------- cards & grids ---------- */
 .card {
   background: var(--surface); border: 1px solid var(--border);

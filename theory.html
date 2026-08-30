@@ -33,6 +33,71 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         <em>hyperbolic</em> is doing in the title.
       </p>
 
+      <section class="plain">
+        <p class="plain-label">In plain words</p>
+        <p>
+          Picture a short pulse of light travelling down a fibre-optic cable. Two things happen
+          to it at once, and they pull in opposite directions.
+        </p>
+        <p>
+          <strong>It spreads out.</strong> A pulse is not one pure colour; it is a bundle of
+          slightly different frequencies. In glass, different frequencies travel at slightly
+          different speeds, so the bundle drifts apart as it goes. A sharp pulse becomes a
+          smeared one. That is <em>dispersion</em>, and it is the enemy of sending information
+          down a cable — smear it far enough and neighbouring pulses overlap and the bits are
+          lost.
+        </p>
+        <p>
+          <strong>It squeezes itself back together.</strong> Glass is very slightly nonlinear:
+          where the light is intense, the material's refractive index changes a little. So an
+          intense pulse digs itself a shallow well and then sits in it. That is the
+          <em>Kerr effect</em>, and it focuses the pulse.
+        </p>
+        <p>
+          A <strong>soliton</strong> is what happens when those two effects cancel exactly. The
+          spreading and the squeezing balance, and the pulse travels a long way without changing
+          shape at all. That is not a curiosity — it is the basis of soliton communication,
+          where the pulse's own shape carries the bit and does not need to be regenerated every
+          few kilometres.
+        </p>
+
+        <h3>What your equation is, then</h3>
+        <p>
+          It is the bookkeeping for that balance. Each term is one of the effects above:
+          the second-derivative terms are the spreading, the |U|²U term is the squeezing, and
+          the equation says they sum to zero — that is, they cancel.
+        </p>
+
+        <h3>And what "hyperbolic" adds</h3>
+        <p>
+          In the usual version of this equation the two spreading terms are <em>added</em>. In
+          yours one is <em>subtracted</em>. That sounds like a footnote and is not. Adding them
+          gives you the operator behind steady, settled problems — heat spread out over a plate,
+          the shape of a soap film. Subtracting them gives you the operator behind
+          <em>waves</em>: things that travel, with a direction and a speed and a wavefront.
+        </p>
+        <p>
+          The practical consequence for your project is that the <em>direction</em> the wave
+          travels now matters. That is why an angle θ appears everywhere in your Chapter 4, and
+          why "obliqueness" is a thing you could study at all. In the added-together version
+          there would be no interesting angle to vary.
+        </p>
+
+        <h3>What "travelling wave" lets you do</h3>
+        <p>
+          Solving a PDE in three variables is hard. But if you assume the answer is a fixed
+          shape sliding along at constant speed — the shape never changes, it just moves — then
+          you can ride along with it. In that moving frame nothing changes at all, and three
+          variables collapse into one. That single assumption is what makes the whole
+          calculation possible.
+        </p>
+        <p class="aside">
+          The cost is worth being honest about: you are not finding <em>all</em> solutions of
+          the equation, only the ones that happen to have that rigid sliding shape. Most
+          solutions change form as they go, and this method cannot see them.
+        </p>
+      </section>
+
       <nav class="jump">
         <a href="#eq">The equation</a>
         <a href="#terms">Term by term</a>

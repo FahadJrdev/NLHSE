@@ -33,6 +33,61 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         the criticism before it is put to you.
       </p>
 
+      <section class="plain">
+        <p class="plain-label">In plain words</p>
+        <p>
+          Ordinary calculus only lets you differentiate a <strong>whole number</strong> of
+          times. You can take one derivative, or two, or three. Fractional calculus asks a
+          strange-sounding question: what would it mean to differentiate <strong>0.8
+          times</strong>?
+        </p>
+        <p>
+          There are two reasons to care. First, some real systems genuinely sit
+          <em>between</em> two integer-order behaviours — anomalous diffusion, viscoelastic
+          materials, anything with memory. A first derivative is too little and a second is too
+          much; the honest description is somewhere in between. Second, an adjustable order
+          turns one model into a whole continuous family of models. Instead of a single
+          equation you now have a dial, and you can turn it until the model matches your data.
+        </p>
+
+        <h3>Why "memory" keeps coming up</h3>
+        <p>
+          An ordinary derivative is <em>local</em>: to know the slope at a point, you only need
+          to look right next to that point. A true fractional derivative is <em>non-local</em>:
+          to get its value at a point you have to integrate over the whole history leading up
+          to it. That is the mathematical shape of memory — the system's present behaviour
+          depends on where it has been, not only on where it is now. Materials that creep, or
+          particles that diffuse anomalously, behave like that.
+        </p>
+
+        <h3>Where the beta derivative fits — and the catch</h3>
+        <p>
+          The beta derivative is <strong>not</strong> one of the non-local ones. It is an
+          ordinary first derivative multiplied by a factor that depends on where you are:
+        </p>
+        <div class="eq"><div>(beta derivative of f) = (x + 1/Γ(β))<sup>1−β</sup> × (ordinary derivative of f)</div></div>
+        <p>
+          So it is <em>local</em>, and it does not really have memory. When β = 1 that factor
+          becomes 1 and you get the plain derivative back, which is the sanity check you want.
+          For other β it stretches the increment more the further out you are.
+        </p>
+        <p>
+          The reason to use it anyway is entirely practical, and it is worth stating plainly
+          rather than dressing up: <strong>because it is local, the ordinary chain rule still
+          works.</strong> The genuinely non-local operators — Caputo, Riemann–Liouville — do not
+          have a simple chain rule, and without one, the substitution trick this whole project
+          depends on is impossible. The beta derivative is the version of "fractional" that is
+          weak enough to be solvable by hand.
+        </p>
+        <p class="aside">
+          That trade is the honest summary of this chapter: you buy exact closed-form solutions,
+          and the price is that the operator does not model memory in the way the word
+          "fractional" suggests. Knowing you paid that price — and being able to say what
+          Caputo would have cost instead — is the difference between using a method and
+          understanding it.
+        </p>
+      </section>
+
       <nav class="jump">
         <a href="#def">The definition</a>
         <a href="#props">The five properties</a>

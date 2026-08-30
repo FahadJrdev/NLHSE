@@ -44,6 +44,58 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         </p>
       </div>
 
+      <section class="plain">
+        <p class="plain-label">In plain words</p>
+        <p>
+          Every piece of work has weak points. Yours has four or five, and none of them is
+          serious. What decides how much they cost you is not the flaws themselves — those are
+          already fixed in the document, unchangeable — but <strong>who finds them first</strong>.
+        </p>
+        <p>
+          If an examiner finds a problem you did not know about, what they learn is that you do
+          not know your own work. If you name it yourself, explain exactly what went wrong, and
+          show you have already tested the fix, what they learn is the opposite: that you check
+          things, that your claims can be trusted, and that you are the sort of person who finds
+          errors rather than the sort who ships them. Same flaw, opposite conclusion.
+        </p>
+
+        <h3>The big one, in plain terms</h3>
+        <p>
+          One of the constants printed in your report is wrong. Not the mathematics — the
+          <em>printing</em>. A χ that should have cancelled didn't, so the published ω is too big
+          by a factor of √χ.
+        </p>
+        <p>
+          Here is why that is a good story rather than a bad one. The other constant, B₁, is
+          correct — and B₁ and ω have to satisfy a simple relationship that comes straight out of
+          your own equations. Testing that relationship is how the error shows up, and it takes
+          about a minute. The reason nobody caught it in 2025 is that the report never
+          substitutes the finished answer back into the original equation. That check is the most
+          basic quality control there is, and its absence is the real lesson — not the typo.
+        </p>
+        <p>
+          So the sentence you want is roughly: <em>"There's a typo in my printed ω. I found it by
+          doing the back-substitution the report doesn't contain. B₁ is right, the correction is
+          one factor of root chi, and with it the solution satisfies the equation to numerical
+          round-off — I can show you."</em> That is a candidate who improved their own work after
+          submitting it.
+        </p>
+
+        <h3>The other four, briefly</h3>
+        <ul>
+          <li>Two symbols disagree between one equation and another — a slip, no consequence.</li>
+          <li>A phase factor gets dropped between the setup and the final answer — harmless for the plots, but incomplete.</li>
+          <li>The figures don't record what value of y was used, so nobody can reproduce them exactly. That is a genuine reproducibility gap.</li>
+          <li>The spikes in Figure 1 are not what they look like. Explained in W07 — worth reading, because the obvious answer is wrong.</li>
+        </ul>
+        <p class="aside">
+          The last category on this page is different: not errors, but questions about
+          <em>fit</em> — why an analytical mathematician wants a numerical position, and why
+          someone who has been writing software for six years is coming back to research. Those
+          need answers too, and they need to be true ones.
+        </p>
+      </section>
+
       <div class="qa-toolbar">
         <input class="search" data-search type="search" placeholder="Filter questions…" aria-label="Filter questions">
         <button class="btn" type="button" data-quiz>Quiz mode</button>

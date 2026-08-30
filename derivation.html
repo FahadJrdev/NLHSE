@@ -33,6 +33,72 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         below is the report's own.
       </p>
 
+      <section class="plain">
+        <p class="plain-label">In plain words</p>
+        <p>
+          This page is one long calculation. Read as a story it has six beats, and if you can
+          tell the story you can follow the algebra when someone puts it in front of you.
+        </p>
+
+        <h3>1 · Change coordinates so the hard part vanishes</h3>
+        <p>
+          The equation has fractional derivatives in it, which nobody can solve directly. So you
+          change variables — and you choose the new variable very deliberately, so that the
+          fractional derivative of it comes out to exactly a constant. The exponents cancel.
+          After the substitution <strong>the fractional order β has disappeared from the
+          equation entirely</strong>; it survives only inside the definition of the new
+          coordinate. You never solve anything fractional. You define the problem so that you
+          don't have to.
+        </p>
+
+        <h3>2 · Three variables become one</h3>
+        <p>
+          Because you assumed a travelling wave, x, y and t only ever appear in one combination.
+          The partial differential equation becomes an ordinary one.
+        </p>
+
+        <h3>3 · One complex equation becomes two real ones</h3>
+        <p>
+          The wave profile is a real number, but the equation has an <em>i</em> in it. A real
+          thing can only satisfy a complex equation if the real part and the imaginary part are
+          <em>separately</em> zero. So one equation splits into two — for free, just by looking
+          at it.
+        </p>
+
+        <h3>4 · The speed falls out immediately</h3>
+        <p>
+          The imaginary half turns out to be simple — one linear equation — and it hands you the
+          wave's speed with no work at all. That is a genuinely nice moment: the speed is not
+          something you get to choose, it is forced on you by the requirement that a real profile
+          solve a complex equation.
+        </p>
+
+        <h3>5 · How long the recipe is, is forced too</h3>
+        <p>
+          Balance how fast the two competing terms grow and you find the answer needs exactly one
+          building block. Not two, not three. One line of counting settles it.
+        </p>
+
+        <h3>6 · Calculus becomes arithmetic</h3>
+        <p>
+          Substitute the guess in, collect the powers, set each coefficient to zero. Now there
+          are no derivatives left anywhere — just a handful of simultaneous equations in a few
+          unknown numbers. Solve them, put the numbers back into the guess, and you have an exact
+          formula for the wave.
+        </p>
+
+        <div class="note risk">
+          <p class="note-title">And this is where the error is</p>
+          <p>
+            Step 6 is also where the report goes wrong. The system of equations is right, and the
+            constant B₁ that came out of it is right — but the printed formula for ω has one
+            extra χ in it, which makes it too big by a factor of √χ. Nothing downstream catches
+            it, because the report never substitutes the answer back in to check. That is the
+            single most useful thing on this page to have understood before an interview.
+          </p>
+        </div>
+      </section>
+
       <nav class="jump">
         <a href="#t1">1. Transformation</a>
         <a href="#t2">2. The ODE</a>
