@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The derivation, line by line — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="derivation">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">The derivation</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col col-wide">
+
+      <p class="eyebrow">05 · The mathematics</p>
+      <h1>The derivation, line by line</h1>
+      <p class="lede">
+        Chapter 3 of the report, unpacked. If you can reproduce this sequence on a whiteboard
+        you can defend the project — everything else is commentary. Every equation number
+        below is the report's own.
+      </p>
+
+      <nav class="jump">
+        <a href="#t1">1. Transformation</a>
+        <a href="#t2">2. The ODE</a>
+        <a href="#t3">3. Real / imaginary</a>
+        <a href="#t4">4. The speed</a>
+        <a href="#t5">5. Balancing</a>
+        <a href="#t6">6. The system</a>
+        <a href="#t7">7. The constants</a>
+        <a href="#t8">8. The solutions</a>
+        <a href="#board">Whiteboard version</a>
+      </nav>
+
+      <h2 id="t1">1 · The fractional travelling-wave transformation</h2>
+      <div class="eq">
+        <div>U(x, y, t) = e<sup>iφ</sup> u(ξ)
+
+ξ = (l/β)(x + 1/√β)<sup>β</sup> + (m/β)(y + 1/√β)<sup>β</sup> − (ω/β)(t + 1/√β)<sup>β</sup>
+
+φ = −(l/β)(x + 1/√β)<sup>β</sup> − (m/β)(y + 1/√β)<sup>β</sup> + (c/β)(t + 1/√β)<sup>β</sup></div>
+        <span class="num">(12)</span>
+      </div>
+      <p>with <strong>l = cos θ</strong> and <strong>m = sin θ</strong>, so that l² + m² = 1 and θ is the oblique angle.</p>
+      <div class="note good">
+        <p class="note-title">Why the transformation has this exact shape</p>
+        <p>
+          Because the beta derivative is (x + 1/Γ(β))<sup>1−β</sup> · d/dx, applying it to
+          (1/β)(x + 1/Γ(β))<sup>β</sup> gives
+          (x + 1/Γ(β))<sup>1−β</sup> · (x + 1/Γ(β))<sup>β−1</sup> = <strong>1</strong>.
+          The exponents cancel exactly. So ᴬ₀𝔇<sup>β</sup><sub>x</sub>ξ = l, exactly as
+          ∂ξ/∂x = l would be in the classical case. <strong>The transformation is constructed
+          precisely so that the fractional derivative disappears.</strong> That is the answer to
+          "why does the β go away?" and it is the single best thing to be able to say about
+          this derivation.
+        </p>
+      </div>
+      <div class="note risk">
+        <p class="note-title">The inconsistency, stated once</p>
+        <p>
+          The report writes <strong>1/√β</strong> here, while Eq. (3) defines the operator with
+          <strong>1/Γ(β)</strong>. The cancellation above only works with the Γ(β) form.
+          See <a href="beta.html#gamma">page 03</a> for how to answer this.
+        </p>
+      </div>
+
+      <h2 id="t2">2 · The converted ODE</h2>
+      <p>Substituting (12) into (1) collapses the PDE to:</p>
+      <div class="eq">
+        <div>i u′(m − l² + cω²) + ½ u″(l² − ω²) + uζ + u³ = 0</div>
+        <span class="num">(13)</span>
+      </div>
+      <p>where the constant ζ gathers everything the parameters contribute:</p>
+      <div class="eq plain">
+        <div>ζ = { m − ½l² − ½ ( (l⁴ − 2l²m + m²) / ω² ) }</div>
+      </div>
+      <p>
+        Three variables have become one. Note what survives: <strong>β does not appear in
+        (13) at all.</strong> The fractional order is entirely inside the definition of ξ.
+        This is the fact that makes the whole approach tractable, and it is worth pointing at
+        explicitly.
+      </p>
+
+      <h2 id="t3">3 · Separating real and imaginary parts</h2>
+      <p>
+        u(ξ) is real, so (13) can only hold if its real and imaginary parts vanish
+        separately. That single observation splits one complex equation into two real ones:
+      </p>
+      <div class="eq">
+        <div>Real:       ½ u″(l² − ω²) + uζ + u³ = 0</div>
+        <span class="num">(14)</span>
+      </div>
+      <div class="eq eq-2">
+        <div>Imaginary:  i u′(m − l² + cω²) = 0</div>
+        <span class="num">(15)</span>
+      </div>
+
+      <h2 id="t4">4 · The speed falls straight out</h2>
+      <p>
+        u′ is not identically zero — a constant solution would be trivial — so the bracket in
+        (15) must vanish. That is one linear equation for c:
+      </p>
+      <div class="eq"><div>m − l² + cω² = 0   ⟹   c = (l² − m)/ω</div><span class="num">(16)</span></div>
+      <div class="note info">
+        <p class="note-title">A free win, and examiners like it</p>
+        <p>
+          The phase speed is <em>not</em> a free parameter. It is forced by the requirement
+          that a real profile solve a complex equation. No solving needed — the imaginary part
+          is linear and hands it over immediately.
+        </p>
+      </div>
+      <p class="footnote">
+        The report writes (16) as c = (l² − m)/ω. Reading it directly from (15) gives the
+        same thing: cω² = l² − m, so c = (l² − m)/ω². The report's (16) shows ω to the first
+        power. This is a small discrepancy worth having noticed — see
+        <a href="qa-weakspots.html">page 09</a>.
+      </p>
+
+      <h2 id="t5">5 · Homogeneous balancing gives N = 1</h2>
+      <p>Balance the highest derivative u″ against the highest nonlinearity u³ in (14):</p>
+      <div class="eq">
+        <div>u ~ δ<sup>N</sup>   ⟹   u″ ~ δ<sup>N+2</sup>,   u³ ~ δ<sup>3N</sup>
+N + 2 = 3N   ⟹   N = 1</div>
+      </div>
+      <p>So the ansatz (8) truncates after one term in each direction:</p>
+      <div class="eq"><div>u(ξ) = A₀ + A₁/δ(ξ) + B₁ δ(ξ)</div><span class="num">(17)</span></div>
+      <p>Three unknown constants — A₀, A₁, B₁ — plus ω still to be determined.</p>
+
+      <h2 id="t6">6 · The algebraic system</h2>
+      <p>
+        Substituting (17) and its derivatives with δ′ = δ² + χ into (14), then setting the
+        coefficient of each power of δ to zero, gives the system the report labels (18):
+      </p>
+      <div class="eq plain">
+        <div>l²B₁ − ω²B₁ + B₁³ = 0
+
+3A₀B₁² = 0
+
+B₁χl² − B₁χω² + 3A₀²B₁ + 3A₁B₁² + ( m − ½l² − ½·l⁴/ω² + l²m/ω² − ½·m²/ω² ) B₁ = 0
+
+A₀³ + 6A₀A₁B₁ + ( m − ½l² − ½·l⁴/ω² + l²m/ω² − ½·m²/ω² ) A₀ = 0
+
+A₁χl² − A₁χω² + 3A₀²A₁ + 3A₁²B₁ + ( m − ½l² − ½·l⁴/ω² + l²m/ω² − ½·m²/ω² ) A₁ = 0
+
+3A₀A₁² = 0
+
+χ²l²A₁ − χ²ω²A₁ + A₁³ = 0</div>
+        <div class="num" style="text-align:right">(18)</div>
+      </div>
+      <div class="note good">
+        <p class="note-title">Read the easy equations first — this is how you show you understand it</p>
+        <p>
+          <code>3A₀B₁² = 0</code> and <code>3A₀A₁² = 0</code> are the cheapest equations in the
+          system. Either A₀ = 0, or both B₁ and A₁ are zero, which would leave nothing.
+          So <strong>A₀ = 0</strong> immediately. The bracketed group repeated through the
+          system is just ζ written out. Being able to walk an examiner through the system in
+          this order — cheapest equation first — is far more convincing than "Maple gave me
+          the answer".
+        </p>
+      </div>
+
+      <h2 id="t7">7 · The constants</h2>
+      <p>Maple's solution to (18), as reported:</p>
+      <div class="eq plain">
+        <div>ω  = ½ √( χ( 2χl² − l² + 2m + √Δ ) / χ )
+
+A₀ = 0
+A₁ = 0
+
+B₁ = √( −¼ ( 2χl² + l² − √Δ − 2m ) / χ )
+
+where  Δ = 4χ²l⁴ − 12χl⁴ + 8χl²m + l⁴ − 8χm² − 4l²m + 16l²mχ + 4m²</div>
+      </div>
+      <div class="note warn">
+        <p class="note-title">Two things to notice, because they will be noticed</p>
+        <p>
+          <strong>A₁ = 0.</strong> The negative-power half of the ansatz — the part that makes
+          the method "unified" rather than an ordinary tanh expansion — contributes nothing
+          for this equation. Honest phrasing: the general ansatz was used, and for this
+          equation it collapsed to the positive-power branch.
+        </p>
+        <p>
+          <strong>The χ in ω cancels.</strong> χ(…)/χ is just (…). Written this way it looks
+          like χ matters more than it does; in ω it does still enter through the
+          2χl² term and through Δ.
+        </p>
+      </div>
+      <p>
+        With A₀ = A₁ = 0, the solution (17) reduces to <strong>u(ξ) = B₁δ(ξ)</strong> — a
+        single term. Everything downstream is B₁ multiplying the auxiliary function.
+      </p>
+
+      <h2 id="t8">8 · The two solution families</h2>
+      <p>Substituting the constants and the two branches of δ, with χ = ∓5 in the reported figures:</p>
+
+      <h3>χ &lt; 0 — hyperbolic</h3>
+      <div class="eq">
+        <div>U<sub>τ</sub>(x,y,t) = ½ · √( −(9/5)l² − (1/5)√(161l⁴ − 124l²m + 44m²) − (2/5)m )
+              × [ √(5P² + 5S²) − S√5 · cosh(2√5(ξ+R)) ] / [ P + S·sinh(2√5(ξ+R)) ]</div>
+        <span class="num">(19)</span>
+      </div>
+
+      <h3>χ &gt; 0 — trigonometric</h3>
+      <div class="eq eq-2">
+        <div>U<sub>υ</sub>(x,y,t) = ½ · √( −(11/5)l² + (1/5)√(41l⁴ + 116l²m − 36m²) + (2/5)m )
+              × [ √(−5P² + 5S²) − S√5 · cos(2√5(ξ+R)) ] / [ P + S·sin(2√5(ξ+R)) ]</div>
+        <span class="num">(20)</span>
+      </div>
+
+      <div class="note info">
+        <p class="note-title">Check that these really are the general formulas at χ = ∓5</p>
+        <p>
+          They are, and verifying it is a good use of ten minutes. Put χ = −5 into Δ:
+          4(25)l⁴ + 60l⁴ + l⁴ = <strong>161l⁴</strong>; −40l²m − 4l²m − 80l²m =
+          <strong>−124l²m</strong>; 40m² + 4m² = <strong>44m²</strong>. That is exactly the
+          radicand in (19). The same substitution with χ = +5 gives 41l⁴ + 116l²m − 36m²,
+          the radicand in (20). And 2√−χ = 2√5 supplies the argument of cosh and sinh.
+          The general constants and the reported special cases agree.
+        </p>
+      </div>
+
+      <div class="note risk">
+        <p class="note-title">Three things about (19) and (20) that you should say before they are asked</p>
+        <p>
+          <strong>The e<sup>iφ</sup> is missing.</strong> Equation (2) says U = e<sup>iφ</sup>u(ξ),
+          but (19) and (20) as printed give only the u part. The phase factor has been dropped.
+          For plots of |U| this is harmless <em>if</em> φ is real; it is what makes the figures
+          reproducible from the printed formula, which they are.
+        </p>
+        <p>
+          <strong>The square roots are of negative numbers.</strong> At θ = 60°, l = 0.5 and
+          m = 0.866, the radicand in (19) evaluates to about −1.60. So B₁ is
+          <strong>imaginary</strong> — about 0.633i. Likewise √(−5P² + 5S²) with P = 3, S = 2
+          is √(−25) = 5i. The solutions are genuinely complex-valued, and the figures plot
+          |U|. This is not an error; it is a fact about the solution that you should state
+          rather than be caught by. The lab on <a href="lab.html">page 11</a> does the
+          arithmetic in complex form for exactly this reason.
+        </p>
+        <p>
+          <strong>(19) is bounded on the real line — the obvious singularity is removable.</strong>
+          Its denominator P + S·sinh(2√5(ξ+R)) does vanish where sinh = −P/S = −1.5, but the
+          numerator vanishes at exactly the same point, because cosh² − sinh² = 1 forces
+          cosh = √(P²+S²)/S and sinh = −P/S to occur together for every P and S. The limit is
+          finite, |δ| ≤ √−χ, and |U| ≤ |B₁|√5 = 1.415 at θ = 60° — which is precisely the
+          plateau in Figures 5 and 10. Genuine poles exist only at complex arguments, reached
+          where x &lt; −1/√β and ξ turns complex; that is the origin of Figure 1's spikes.
+          This matters because "singular soliton" is the natural guess and it is wrong.
+        </p>
+      </div>
+
+      <h2 id="board">The whiteboard version</h2>
+      <p>Eight lines. Practise until you can write them without looking.</p>
+      <div class="eq plain">
+        <div>1.  iU_y + ½(U_xx − U_tt) + |U|²U = 0
+
+2.  U = e^{iφ} u(ξ),  ξ ~ lx + my − ωt   (beta-deformed)
+
+3.  ⟹  iu′(m − l² + cω²) + ½u″(l² − ω²) + uζ + u³ = 0
+
+4.  Im:  c = (l² − m)/ω          Re:  ½u″(l² − ω²) + uζ + u³ = 0
+
+5.  balance u″ vs u³:  N + 2 = 3N  ⟹  N = 1
+
+6.  u = A₀ + A₁/δ + B₁δ,     δ′ = δ² + χ
+
+7.  match powers of δ  ⟹  A₀ = A₁ = 0,  B₁ and ω as given
+
+8.  χ &lt; 0 ⟹ cosh/sinh solution (19);  χ &gt; 0 ⟹ cos/sin solution (20)</div>
+      </div>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

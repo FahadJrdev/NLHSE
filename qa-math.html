@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q&amp;A — general mathematics — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="qa-math">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">Q&amp;A — mathematics</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">08 · The interview</p>
+      <h1>Q&amp;A — general mathematics</h1>
+      <p class="lede">
+        Questions that are not about your report but sit one step around it. These separate
+        candidates who know their own calculation from candidates who know the subject. Most
+        panels spend more time here than on the thesis itself.
+      </p>
+
+      <div class="qa-toolbar">
+        <input class="search" data-search type="search" placeholder="Filter questions…" aria-label="Filter questions">
+        <button class="btn" type="button" data-quiz>Quiz mode</button>
+        <button class="btn" type="button" data-reveal-all>Reveal all</button>
+        <span class="counter" data-counter></span>
+      </div>
+
+      <h2 data-qa-sec>PDE fundamentals</h2>
+
+      <article class="qa" id="m01">
+        <div class="qa-head"><span class="qa-id">M01</span>
+          <h3 class="qa-q">Classify second-order PDEs. Where does your equation sit?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">For Au<sub>xx</sub> + Bu<sub>xy</sub> + Cu<sub>yy</sub> + … = 0 the discriminant B² − 4AC decides: negative is elliptic, zero parabolic, positive hyperbolic. My equation's spatial operator U<sub>xx</sub> − U<sub>tt</sub> has A = 1, C = −1, B = 0, so the discriminant is +4 — hyperbolic.</p>
+          <p>The canonical examples, worth having ready:</p>
+          <ul>
+            <li><strong>Elliptic</strong> — Laplace, u<sub>xx</sub> + u<sub>yy</sub> = 0. Equilibrium, no time, boundary-value problems, infinitely smooth solutions.</li>
+            <li><strong>Parabolic</strong> — heat, u<sub>t</sub> = u<sub>xx</sub>. Diffusive, smooths instantly, infinite propagation speed.</li>
+            <li><strong>Hyperbolic</strong> — wave, u<sub>tt</sub> = u<sub>xx</sub>. Finite propagation speed, characteristics, discontinuities persist.</li>
+          </ul>
+          <p>
+            One caveat worth adding: the full Schrödinger equation is first order in the
+            evolution variable with an i in front, so it is dispersive rather than falling
+            neatly into the three-way classification. The classification applies to the
+            second-order spatial operator.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">pde</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="m02">
+        <div class="qa-head"><span class="qa-id">M02</span>
+          <h3 class="qa-q">What is dispersion, and how does it differ from diffusion?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Dispersion means different wavelengths travel at different speeds, so a packet spreads while its energy is conserved. Diffusion damps the amplitude and destroys energy. The i in the Schrödinger equation is exactly what turns one into the other.</p>
+          <p>
+            Concretely: substitute u = e<sup>i(kx−ωt)</sup>. For the heat equation
+            u<sub>t</sub> = u<sub>xx</sub> you get ω = −ik², so the mode decays like
+            e<sup>−k²t</sup> — diffusion, and high frequencies die fastest. For the free
+            Schrödinger equation iu<sub>t</sub> = −u<sub>xx</sub> you get ω = k², real, so the
+            mode keeps its magnitude and only its phase rotates — dispersion.
+          </p>
+          <p>The dispersion relation is the cleanest way to answer this, and being able to derive it in two lines is worth more than a verbal description.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">pde</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="m03">
+        <div class="qa-head"><span class="qa-id">M03</span>
+          <h3 class="qa-q">Derive the dispersion relation for the linear part of your equation.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Drop the cubic term, substitute U = e<sup>i(k₁x + k₂y − Ωt)</sup> into iU<sub>y</sub> + ½(U<sub>xx</sub> − U<sub>tt</sub>) = 0 and read off the relation between k₂ and the other two.</p>
+          <p>
+            U<sub>y</sub> = ik₂U, U<sub>xx</sub> = −k₁²U, U<sub>tt</sub> = −Ω²U. So
+            i(ik₂) + ½(−k₁² + Ω²) = 0, giving <strong>k₂ = ½(Ω² − k₁²)</strong>.
+          </p>
+          <p>
+            Note what that says: y is the evolution variable, and the "frequency" conjugate to
+            it depends on the <em>difference</em> of the squares — a direct consequence of the
+            hyperbolic sign. In the elliptic case it would be a sum, and the relation would be
+            sign-definite.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">pde</span><span class="tag">derivation</span></div>
+      </article>
+
+      <article class="qa" id="m04">
+        <div class="qa-head"><span class="qa-id">M04</span>
+          <h3 class="qa-q">What is a well-posed problem?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Hadamard's three conditions: a solution exists, it is unique, and it depends continuously on the data.</p>
+          <p>
+            The third is the one that bites in practice. If small changes in the initial data
+            produce large changes in the solution, no numerical method can help you — the
+            difficulty is in the problem, not the algorithm. The standard example is the
+            backwards heat equation.
+          </p>
+          <p>
+            Relevant to your work: an ansatz-based method says nothing about well-posedness. You
+            exhibit particular solutions; you do not show they are the only ones or that they are
+            stable. Being able to say that unprompted is a mark of care.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">pde</span><span class="tag">theory</span></div>
+      </article>
+
+      <h2 data-qa-sec>Nonlinear waves</h2>
+
+      <article class="qa" id="m05">
+        <div class="qa-head"><span class="qa-id">M05</span>
+          <h3 class="qa-q">What is a soliton, properly?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">A localised travelling wave that keeps its shape, moves at constant speed, and survives collision with another one — emerging with its shape intact and only a phase shift.</p>
+          <p>
+            The third condition is what distinguishes a soliton from a solitary wave, and it is
+            tied to complete integrability — the existence of infinitely many conserved
+            quantities and an inverse scattering transform. The classical integrable examples are
+            KdV, the cubic NLS in 1+1 dimensions, and sine-Gordon.
+          </p>
+          <p>
+            History is worth a sentence: Russell observing a wave in the Union Canal in 1834,
+            Korteweg and de Vries explaining it in 1895, and Zabusky and Kruskal coining
+            "soliton" in 1965 after noticing the collision property numerically.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">solitons</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="m06">
+        <div class="qa-head"><span class="qa-id">M06</span>
+          <h3 class="qa-q">Bright versus dark solitons?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">A bright soliton is a localised peak on a zero background — sech-shaped, and it needs focusing nonlinearity. A dark soliton is a localised dip in a non-zero background — tanh-shaped, and it needs defocusing nonlinearity.</p>
+          <p>
+            You should also know the third kind, because it comes up constantly in this
+            literature: a <strong>singular</strong> soliton, where the denominator of the
+            closed-form solution vanishes and the solution blows up.
+          </p>
+          <p>
+            Be careful not to assume your χ &lt; 0 branch is one. It looks like it, but the
+            apparent pole is removable and the solution is bounded on the real line — it is a
+            <strong>kink</strong>, tending to ∓|B₁|√−χ at ξ → ±∞. See
+            <a href="qa-weakspots.html#w07">W07</a>.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">solitons</span><span class="tag">relevant</span></div>
+      </article>
+
+      <article class="qa" id="m07">
+        <div class="qa-head"><span class="qa-id">M07</span>
+          <h3 class="qa-q">Why does a soliton exist at all?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Exact balance between dispersion, which spreads a packet, and nonlinearity, which focuses it. Remove either and the balance fails.</p>
+          <p>
+            In the NLS the intensity-dependent refractive index means an intense pulse creates
+            its own guiding potential — self-phase modulation — and the resulting focusing
+            exactly cancels the spreading from the second-derivative term. The balance is not
+            approximate; it is why an exact solution exists.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">solitons</span><span class="tag">physics</span></div>
+      </article>
+
+      <article class="qa" id="m08">
+        <div class="qa-head"><span class="qa-id">M08</span>
+          <h3 class="qa-q">What is integrability, and is your equation integrable?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Integrability means the equation admits a Lax pair and an inverse scattering transform, with infinitely many conservation laws. I did not establish it for my equation, and I would not claim it.</p>
+          <p>
+            The honest position: the 1+1-dimensional cubic NLS is integrable. Higher-dimensional
+            and hyperbolic variants generally are not, and the fractional modification is a further
+            complication. My method finds particular exact solutions, which is a much weaker
+            statement than integrability — plenty of non-integrable equations have exact
+            travelling-wave solutions.
+          </p>
+          <p>Do not be tempted to claim integrability because you found exact solutions. They are not the same thing, and the difference is exactly what an examiner is testing.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">theory</span><span class="tag">hard</span></div>
+      </article>
+
+      <h2 data-qa-sec>Fractional calculus</h2>
+
+      <article class="qa" id="m09">
+        <div class="qa-head"><span class="qa-id">M09</span>
+          <h3 class="qa-q">Name the main fractional derivatives and how they differ.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Riemann–Liouville and Caputo are genuinely non-local integral operators; conformable and beta are local operators built from a first derivative and a weight.</p>
+          <div class="tw">
+            <table>
+              <thead><tr><th>Operator</th><th>Non-local?</th><th>Chain rule?</th><th>Note</th></tr></thead>
+              <tbody>
+                <tr><td>Riemann–Liouville</td><td>Yes</td><td>No</td><td>Derivative of a constant is not zero</td></tr>
+                <tr><td>Caputo</td><td>Yes</td><td>No</td><td>Derivative of a constant is zero; standard for initial-value problems</td></tr>
+                <tr><td>Conformable</td><td>No</td><td>Yes</td><td>Simple, and criticised for that</td></tr>
+                <tr><td>Beta (Atangana)</td><td>No</td><td>Yes</td><td>What I used; a weighted first derivative</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The Caputo point about constants is the detail most often asked. Under
+            Riemann–Liouville the fractional derivative of a constant is not zero, which makes
+            physical initial conditions awkward; Caputo fixes that, which is why it dominates in
+            applications.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">fractional</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="m10">
+        <div class="qa-head"><span class="qa-id">M10</span>
+          <h3 class="qa-q">If you had to use Caputo instead, what would change?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">The chain rule would be gone, so the travelling-wave reduction would fail and the whole method with it. I would have to solve numerically.</p>
+          <p>
+            That is the real answer and it is a good one, because it identifies precisely what
+            the method depends on. Concretely you would move to an L1 scheme or a
+            Grünwald–Letnikov discretisation for the fractional operator, and immediately face
+            the characteristic difficulty of non-local operators: every time step needs the
+            entire history, so cost grows like O(N²) unless you use fast-convolution or
+            sum-of-exponentials techniques.
+          </p>
+          <p>Knowing that memory cost is the central practical issue in fractional numerics is the kind of detail that reads as genuine familiarity.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">fractional</span><span class="tag">numerics</span><span class="tag">hard</span></div>
+      </article>
+
+      <h2 data-qa-sec>Bridging to numerics</h2>
+
+      <article class="qa" id="m11">
+        <div class="qa-head"><span class="qa-id">M11</span>
+          <h3 class="qa-q">How would you solve your equation numerically?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Split-step Fourier: alternate between the linear part, which is diagonal in Fourier space, and the nonlinear part, which is diagonal in physical space and can be integrated exactly because |U| is constant over the nonlinear substep.</p>
+          <p>
+            The structure: over a step h, advance the linear part by multiplying the Fourier
+            coefficients by e<sup>−ik²h/2</sup>, then advance the nonlinear part in physical
+            space by multiplying by e<sup>i|U|²h</sup>. Strang splitting — half a linear step,
+            a full nonlinear step, half a linear step — makes it second order.
+          </p>
+          <p>
+            Why the nonlinear substep is exact: over that substep the equation is
+            iU<sub>t</sub> = −|U|²U, and |U|² is conserved, so the solution is a pure phase
+            rotation. That is the observation the method is built on.
+          </p>
+          <p>Alternatives worth naming: Crank–Nicolson finite differences with a fixed-point iteration for the nonlinearity, or a relaxation scheme that conserves the discrete energy exactly.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">numerics</span><span class="tag">critical</span></div>
+      </article>
+
+      <article class="qa" id="m12">
+        <div class="qa-head"><span class="qa-id">M12</span>
+          <h3 class="qa-q">How would you check that a numerical solution is correct?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Three checks: convergence under refinement at the expected rate, conservation of quantities the equation conserves, and comparison against an exact solution — which is exactly what my project provides.</p>
+          <ul>
+            <li><strong>Convergence.</strong> Halve h, measure the error, confirm it falls by the expected factor. If you have no exact solution, compare against a much finer run.</li>
+            <li><strong>Invariants.</strong> The NLS conserves mass ∫|U|² and an energy. Watching those drift is the cheapest possible diagnostic and it runs every step.</li>
+            <li><strong>Exact benchmarks.</strong> Start from a known exact solution and measure the drift over time. My Eqs. (19) and (20) are precisely this.</li>
+          </ul>
+          <p>The third point is your natural bridge from an analytical project into a computational group — say it in those terms.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">numerics</span><span class="tag">critical</span></div>
+      </article>
+
+      <article class="qa" id="m13">
+        <div class="qa-head"><span class="qa-id">M13</span>
+          <h3 class="qa-q">What is the CFL condition?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">A necessary stability condition for explicit schemes on hyperbolic problems: the numerical domain of dependence must contain the physical one, which for the wave equation means cΔt/Δx ≤ 1.</p>
+          <p>
+            The intuition is worth stating: if the physical wave travels further in one time step
+            than the stencil can see, the scheme is computing without the information it needs,
+            and it will blow up.
+          </p>
+          <p>
+            For dispersive problems like Schrödinger the analogous explicit restriction is
+            harsher — Δt ~ Δx² — which is a large part of why implicit or spectral-splitting
+            methods dominate there.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">numerics</span></div>
+      </article>
+
+      <article class="qa" id="m14">
+        <div class="qa-head"><span class="qa-id">M14</span>
+          <h3 class="qa-q">Weak formulation and finite elements — what is the idea?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Multiply the equation by a test function, integrate over the domain, and move derivatives onto the test function by parts. This lowers the smoothness the solution needs and turns the PDE into a problem of finding a function in a finite-dimensional subspace.</p>
+          <p>
+            The gain: a classical solution must be twice differentiable; a weak solution needs
+            only one derivative in an L² sense, so H¹ is the natural space. Discretising means
+            choosing a basis of piecewise polynomials on a mesh, which reduces everything to a
+            linear system with a sparse matrix.
+          </p>
+          <p>
+            Be candid if you have not used FEM: "I know the formulation but I have not
+            implemented a solver" is a perfectly respectable answer and far better than bluffing
+            about a method you have not used. Then say what you have done.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">numerics</span><span class="tag">honesty</span></div>
+      </article>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

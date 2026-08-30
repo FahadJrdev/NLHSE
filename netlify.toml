@@ -1,0 +1,11 @@
+[build]
+  publish = "."
+
+# Pyodide is fetched from jsDelivr and compiles WebAssembly, which needs
+# cross-origin isolation to be *absent* or these headers to permit it.
+# No build step, no dependencies — this is a static site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

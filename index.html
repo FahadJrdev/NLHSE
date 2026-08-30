@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start here — NLHSE project defence</title>
+<meta name="description" content="Interview preparation for the M.S. project 'Traveling Wave Solutions of the (2+1)-Dimensional Nonlinear Hyperbolic Schrödinger Equation'.">
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="index">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">Start here</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">00 · Orientation</p>
+      <h1>Your own project, ready to defend.</h1>
+      <p class="lede">
+        Everything in this site is drawn from one document: <em>Traveling Wave Solutions of
+        the Nonlinear Hyperbolic Schrödinger Equation</em>, your M.S. project report,
+        University of Chittagong, January 2025. Nothing here is invented. Where the report
+        is thin or inconsistent, this site says so plainly rather than papering over it —
+        because an examiner will find those places, and the only good answer is one you
+        arrived at first.
+      </p>
+
+      <div class="hero">
+        <canvas data-wave aria-label="The two solution branches plotted against the wave variable xi"></canvas>
+        <p class="hero-cap">
+          The two branches you derived, along real ξ, with P = 3, S = 2, R = 3.
+          Indigo: δ for χ = −5 — a kink from +√5 to −√5, passing straight through
+          ξ = −3.2672 where the denominator vanishes, because the numerator vanishes there too.
+          Red: |δ| for χ = +5, periodic (scaled to share the axis). Both are bounded for real ξ;
+          the spikes in your Figure 1 come from the region where ξ turns complex.
+        </p>
+      </div>
+
+      <h2>The project in one paragraph</h2>
+      <p>
+        You took the (2+1)-dimensional nonlinear hyperbolic Schrödinger equation — a model for
+        how an optical signal spreads in single-mode fibre — replaced its integer-order
+        derivatives with <strong>beta fractional derivatives</strong>, and solved it exactly using
+        the <strong>Unified Technique</strong>. A traveling-wave ansatz collapses the PDE in three
+        variables to a single ODE in ξ; separating real and imaginary parts fixes the wave
+        speed; homogeneous balancing fixes the solution's size at N = 1; and solving the
+        resulting algebraic system in Maple yields two closed-form families — a hyperbolic
+        one for χ &lt; 0 and a trigonometric one for χ &gt; 0. Eleven Maple figures then show
+        how obliqueness θ, the fractional order β and time reshape the wave.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="card stat"><span class="k">Governing equation</span><span class="v">iU<sub>y</sub> + ½(U<sub>xx</sub> − U<sub>tt</sub>) + |U|²U = 0</span></div>
+        <div class="card stat"><span class="k">Method</span><span class="v">Unified Technique + beta fractional derivative</span></div>
+        <div class="card stat"><span class="k">Result</span><span class="v">Two exact families, Eqs. (19) &amp; (20)</span></div>
+      </div>
+
+      <h2>How to use this site</h2>
+      <ol class="steps">
+        <li>
+          <h4>Rebuild the report in your own words</h4>
+          <p>
+            Pages 01–06 walk the whole document: what the equation is, what the beta
+            derivative buys you, how the Unified Technique works, the derivation line by
+            line, and what each of the eleven figures actually shows. Read these once
+            end to end.
+          </p>
+        </li>
+        <li>
+          <h4>Answer out loud, not in your head</h4>
+          <p>
+            The Q&amp;A pages (07–09) each have a <strong>Quiz mode</strong> button. Turn it on
+            and the answers hide; click a question to reveal. Every answer starts with a
+            <strong>bold one-sentence version</strong> — that is the bit you say. The paragraphs
+            under it are for when they push further.
+          </p>
+        </li>
+        <li>
+          <h4>Run the mathematics</h4>
+          <p>
+            Page 11 is a real Python environment in the browser — no install, no server.
+            Every solution formula in the report is implemented there, and every code cell
+            is editable. Change θ, change β, change χ, press Run, and watch the figure
+            change. Being able to say <em>"I reproduced Figure 1 numerically"</em> is worth
+            more than any amount of description.
+          </p>
+        </li>
+        <li>
+          <h4>Read the hard questions before someone asks them</h4>
+          <p>
+            Page 09 collects the things in the report that will not survive a determined
+            examiner: an error in the printed ω that you can now derive and correct yourself,
+            the Γ(β) / √β inconsistency, the missing e<sup>iφ</sup> factor in the final
+            solutions, the unstated y in the plots, and the real reason the χ &lt; 0 branch
+            spikes. You lose nothing by knowing these. You lose a lot by being surprised by them.
+          </p>
+        </li>
+      </ol>
+
+      <div class="note info">
+        <p class="note-title">Where you actually stand</p>
+        <p>
+          This is an <strong>analytical</strong> project: exact solutions by symbolic manipulation,
+          verified graphically in Maple. It is not a numerical-methods project — you did not
+          discretise anything, and there is no error analysis or convergence study in the
+          report. Most funded positions in this area are numerical. Say the sentence
+          honestly and early, then show that the gap is small and you are already crossing
+          it — which is what page 11 is for.
+        </p>
+      </div>
+
+      <h2>The facts, in case you are asked flatly</h2>
+      <div class="tw">
+        <table>
+          <tbody>
+            <tr><th>Title</th><td>Traveling Wave Solutions of Nonlinear Hyperbolic Schrödinger Equation</td></tr>
+            <tr><th>Degree</th><td>M.S. in Mathematics — course code AMAT-527</td></tr>
+            <tr><th>Institution</th><td>Department of Mathematics, University of Chittagong, Chattogram-4331</td></tr>
+            <tr><th>Supervisor</th><td>Md. Farhad Uddin, Assistant Professor</td></tr>
+            <tr><th>Session / submitted</th><td>MS 2021–2022 · January 2025</td></tr>
+            <tr><th>Length</th><td>24 pages · 5 chapters · 11 figures · 25 references</td></tr>
+            <tr><th>Tooling used</th><td>Maple — for the algebraic system and every figure</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note good">
+        <p class="note-title">One line to open with</p>
+        <p>
+          <em>"My M.S. project derived exact traveling-wave solutions of the
+          (2+1)-dimensional nonlinear hyperbolic Schrödinger equation under a beta
+          fractional derivative, using the Unified Technique. I got two closed-form
+          families — hyperbolic and trigonometric — and studied how obliqueness and the
+          fractional order reshape them."</em>
+        </p>
+      </div>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

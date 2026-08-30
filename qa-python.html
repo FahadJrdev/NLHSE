@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q&amp;A — programming &amp; numerics — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="qa-python">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">Q&amp;A — programming</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">12 · Programming</p>
+      <h1>Q&amp;A — programming &amp; numerics</h1>
+      <p class="lede">
+        You have six years of professional software experience. In a computational group that is
+        an advantage over most mathematics graduates — but only if you can connect it to
+        scientific computing rather than to web development. These questions do that.
+      </p>
+
+      <div class="qa-toolbar">
+        <input class="search" data-search type="search" placeholder="Filter questions…" aria-label="Filter questions">
+        <button class="btn" type="button" data-quiz>Quiz mode</button>
+        <button class="btn" type="button" data-reveal-all>Reveal all</button>
+        <span class="counter" data-counter></span>
+      </div>
+
+      <h2 data-qa-sec>Your own code</h2>
+
+      <article class="qa" id="y01">
+        <div class="qa-head"><span class="qa-id">Y01</span>
+          <h3 class="qa-q">Show me how you would implement your solution in code.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Four functions: the constants from θ and χ, the travelling coordinate ξ, the auxiliary function δ, and U = B₁δ. Everything in complex arithmetic, and plot the modulus.</p>
+          <p>The structure, which you should be able to sketch from memory:</p>
+          <div class="eq plain">
+            <div>constants(theta, chi)  ->  l, m, omega, B1, zeta
+xi_of(x, y, t, ...)    ->  Eq. (12)
+delta(xi, chi, P,S,R)  ->  Eq. (10) if chi&lt;0 else Eq. (11)
+U(...)                 ->  B1 * delta(xi_of(...))</div>
+          </div>
+          <p>
+            The one design decision worth explaining unprompted: <strong>use
+            <code>np.emath.sqrt</code>, not <code>np.sqrt</code></strong>. The radicands are
+            genuinely negative at these parameters — B₁ ≈ 0.633i — so plain
+            <code>np.sqrt</code> returns <code>nan</code> and silently destroys the result.
+            <code>np.emath.sqrt</code> promotes to complex.
+          </p>
+          <p>It is all running on <a href="lab.html">page 11</a>. Being able to open it and run it is worth more than describing it.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">implementation</span><span class="tag">critical</span></div>
+      </article>
+
+      <article class="qa" id="y02">
+        <div class="qa-head"><span class="qa-id">Y02</span>
+          <h3 class="qa-q">How did you find the error in your constants?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">By writing the solution as code and substituting it back into the equation — the check the report never contained.</p>
+          <p>
+            The method is worth describing because it generalises: compute u″ by central
+            differences, form the residual ½u″(l² − ω²) + ζu + u³, and take the maximum modulus
+            over a sample of ξ, normalised by the size of u³ so the number is dimensionless. If
+            the solution is right the residual sits at the truncation error of the difference
+            formula, around 10<sup>−6</sup> for h = 10<sup>−5</sup>. It came out at order one,
+            which meant something was wrong with the constants rather than with the arithmetic.
+          </p>
+          <p>
+            Then bisect: δ satisfied its own ODE to 10<sup>−8</sup>, so Eqs. (10) and (11) were
+            fine. That left ω and B₁, and the condition B₁² = ω² − l² identified which of the
+            two was inconsistent.
+          </p>
+          <p>This is a debugging story with a clean method and a definite outcome. It is one of the best things you can talk about.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">debugging</span><span class="tag">opportunity</span></div>
+      </article>
+
+      <article class="qa" id="y03">
+        <div class="qa-head"><span class="qa-id">Y03</span>
+          <h3 class="qa-q">Why NumPy rather than loops?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Because the loop runs in the Python interpreter and the array operation runs in compiled C over contiguous memory — typically one to two orders of magnitude faster, and the code is shorter.</p>
+          <p>
+            The deeper reason, which matters for PDE work: array expressions map directly onto
+            the mathematics. <code>np.abs(U(X, 1.0, T))</code> over a meshgrid <em>is</em> the
+            surface. There is no index bookkeeping to get wrong.
+          </p>
+          <p>
+            Know the cost too: vectorising allocates temporaries. For a large grid a chain of
+            array expressions can use several times the memory of the result, and that is when
+            you reach for in-place operations or <code>numexpr</code>.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">numpy</span></div>
+      </article>
+
+      <article class="qa" id="y04">
+        <div class="qa-head"><span class="qa-id">Y04</span>
+          <h3 class="qa-q">How would you plot a 3D surface that goes to infinity?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Clip it and say so in the caption — which is what Maple did in my Figure 1, stopping the axis at 9 against a plateau of 1.4.</p>
+          <p>
+            The options: clip with <code>np.clip</code>, plot on a log scale, or mask the
+            neighbourhood of the pole with <code>nan</code> so matplotlib leaves a hole. Masking
+            is the most honest, because it shows visually where the solution ceases to exist
+            rather than drawing a flat plateau that looks like real data.
+          </p>
+          <p>
+            The presentational point is the important one: a clipped axis with no note is
+            misleading. This is precisely the criticism available against Figure 1 as published,
+            and naming it before the panel does is worth doing.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">plotting</span><span class="tag">honesty</span></div>
+      </article>
+
+      <h2 data-qa-sec>Scientific computing</h2>
+
+      <article class="qa" id="y05">
+        <div class="qa-head"><span class="qa-id">Y05</span>
+          <h3 class="qa-q">Write a split-step Fourier solver for the NLS.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Half a linear step in Fourier space, a full nonlinear step in physical space, half a linear step again — Strang splitting, second-order accurate.</p>
+          <div class="eq plain">
+            <div>k  = 2*np.pi*np.fft.fftfreq(N, d=L/N)
+Lh = np.exp(-0.5j * k**2 * (dt/2))      # half linear step
+
+for n in range(steps):
+    U = np.fft.ifft(Lh * np.fft.fft(U))         # half linear
+    U = U * np.exp(1j * np.abs(U)**2 * dt)      # full nonlinear, exact
+    U = np.fft.ifft(Lh * np.fft.fft(U))         # half linear</div>
+          </div>
+          <p>
+            Two things to be able to explain. <strong>Why the nonlinear step is exact:</strong>
+            over that substep the equation is iU<sub>t</sub> = −|U|²U, and |U|² does not change,
+            so the update is a pure phase rotation with no error at all. <strong>Why Fourier:</strong>
+            the linear operator is diagonal in Fourier space, so the linear step is exact too —
+            all the error comes from the splitting, not from either piece.
+          </p>
+          <p>Caveats worth volunteering: periodic boundary conditions are implied, and you need enough resolution that the highest Fourier mode is not excited, or you get aliasing.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">numerics</span><span class="tag">critical</span></div>
+      </article>
+
+      <article class="qa" id="y06">
+        <div class="qa-head"><span class="qa-id">Y06</span>
+          <h3 class="qa-q">How do you verify a solver converges at the right rate?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Halve the step, measure the error against an exact solution, and check the ratio. Second order means the error should fall by four; a log–log plot of error against step size should have slope 2.</p>
+          <p>
+            If no exact solution is available, use a much finer run as the reference, or use the
+            method of manufactured solutions: pick the answer you want, substitute it into the
+            PDE, and add whatever source term makes it exact.
+          </p>
+          <p>
+            Then connect it back: "my project's exact solutions are usable as the reference in
+            the first version of this test, which is the least common of the three ingredients."
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">numerics</span><span class="tag">verification</span></div>
+      </article>
+
+      <article class="qa" id="y07">
+        <div class="qa-head"><span class="qa-id">Y07</span>
+          <h3 class="qa-q">What is catastrophic cancellation, and where might it bite here?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Subtracting two nearly equal floating-point numbers destroys significant digits. In these solutions it lurks in Δ = 4χ²l⁴ − 12χl⁴ + … , where large terms of opposite sign can cancel down to something small.</p>
+          <p>
+            The classic illustration is the quadratic formula: when b² ≫ 4ac, one of the roots
+            computes as a difference of nearly equal quantities and loses precision; the fix is
+            to compute the well-conditioned root and get the other from the product of the roots.
+          </p>
+          <p>
+            The relevant practical answer here: my Δ evaluates to 16.2 at θ = 60°, χ = −5, from
+            terms of size up to 30, so there is no problem at these parameters — but it would be
+            worth checking near angles where Δ approaches zero, since B₁ and ω both depend on
+            √Δ and the solution degenerates there.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">floating-point</span><span class="tag">hard</span></div>
+      </article>
+
+      <article class="qa" id="y08">
+        <div class="qa-head"><span class="qa-id">Y08</span>
+          <h3 class="qa-q">Why is float64 the default in scientific computing?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">About 16 significant decimal digits, with machine epsilon near 2.2 × 10⁻¹⁶. That leaves enough headroom for error to accumulate over millions of operations without contaminating the result.</p>
+          <p>
+            float32 gives about 7 digits, which is often not enough once a time-stepping scheme
+            has run for 10⁶ steps and rounding errors have accumulated. It is used where memory
+            bandwidth dominates — large-scale CFD, and machine learning, where the tolerance for
+            noise is much higher.
+          </p>
+          <p>
+            Worth knowing the standard traps: <code>0.1 + 0.2 != 0.3</code>, never compare
+            floats with <code>==</code>, and summation error grows with the number of terms
+            unless you use pairwise or Kahan summation — which NumPy's <code>sum</code> already
+            does pairwise.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">floating-point</span></div>
+      </article>
+
+      <h2 data-qa-sec>Engineering practice</h2>
+
+      <article class="qa" id="y09">
+        <div class="qa-head"><span class="qa-id">Y09</span>
+          <h3 class="qa-q">How does your industry experience help in research computing?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Reproducibility and testing. Most research code is written once by one person and never tested; six years of professional practice means version control, tests, and code someone else can actually run.</p>
+          <p>Be concrete rather than generic:</p>
+          <ul>
+            <li><strong>Version control</strong> — every result traceable to the commit that produced it.</li>
+            <li><strong>Testing</strong> — a solver should have a convergence test in CI, not a note in a notebook saying it worked once.</li>
+            <li><strong>Databases and data handling</strong> — parameter sweeps generate a lot of runs, and organising them is an ordinary engineering problem I have solved many times.</li>
+            <li><strong>Performance</strong> — profiling before optimising, and knowing that the answer is usually an algorithm rather than a micro-optimisation.</li>
+          </ul>
+          <p>
+            The honest caveat, which makes the rest credible: web and API work is not numerical
+            work. What transfers is discipline and tooling, not domain knowledge.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">experience</span><span class="tag">fit</span></div>
+      </article>
+
+      <article class="qa" id="y10">
+        <div class="qa-head"><span class="qa-id">Y10</span>
+          <h3 class="qa-q">How would you test numerical code, given the answer is never exactly right?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Test properties rather than values: convergence rates, conserved quantities, symmetries, and known exact cases within a tolerance.</p>
+          <ul>
+            <li><strong>Exact cases.</strong> A linear problem, a steady state, or an analytical solution — assert agreement to a stated tolerance.</li>
+            <li><strong>Convergence order.</strong> Refine and assert the observed order is within a tolerance of the theoretical one. This catches whole classes of subtle bugs that a single-resolution test misses.</li>
+            <li><strong>Invariants.</strong> Mass and energy for the NLS. A drift means a bug, and it is checkable every step.</li>
+            <li><strong>Symmetry.</strong> Translate the initial data and confirm the result translates with it.</li>
+            <li><strong>Regression.</strong> Store a known-good output and compare against it within tolerance so you notice unintended change.</li>
+          </ul>
+          <p>The convergence-order test is the one that marks out someone who has actually done this. Lead with it.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">testing</span><span class="tag">critical</span></div>
+      </article>
+
+      <article class="qa" id="y11">
+        <div class="qa-head"><span class="qa-id">Y11</span>
+          <h3 class="qa-q">Do you know MATLAB? Julia? C++? Fortran?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Say exactly what is true, then say how fast you pick things up and give evidence.</p>
+          <p>
+            Your true position: Maple for the project's symbolic work, Python with NumPy,
+            SciPy, SymPy and matplotlib, and six years of professional PHP, JavaScript and
+            related stacks. If you have not written MATLAB or Fortran, say so.
+          </p>
+          <p>
+            The line that carries weight is evidence of transfer: "I hadn't written scientific
+            Python before this year; I've since implemented my thesis solutions, reproduced my
+            figures, and found an error in my own published constants doing it." That is a
+            concrete demonstration rather than a claim about learning speed.
+          </p>
+          <p>
+            Note also that MATLAB and Julia are close enough to NumPy in idiom that the
+            transition is days rather than months, and it is fine to say that — as long as you
+            do not claim to already know them.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">honesty</span><span class="tag">languages</span></div>
+      </article>
+
+      <article class="qa" id="y12">
+        <div class="qa-head"><span class="qa-id">Y12</span>
+          <h3 class="qa-q">SymPy or hand algebra?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Both, and always the second as a check on the first — which is exactly the lesson of the ω error.</p>
+          <p>
+            A CAS does not make mistakes in the algebra; the mistakes happen at the boundaries —
+            entering the problem, choosing among the roots it returns, and copying the answer out.
+            All three are human steps, and the last one is where my error occurred.
+          </p>
+          <p>
+            The practical discipline that follows: whatever the CAS returns, substitute it back
+            numerically. It takes minutes and it catches the entire class of transcription error.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">tools</span><span class="tag">judgement</span></div>
+      </article>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

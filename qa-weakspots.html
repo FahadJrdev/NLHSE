@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hard questions &amp; honest gaps — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="qa-weakspots">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">Hard questions</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">09 · The interview</p>
+      <h1>Hard questions &amp; honest gaps</h1>
+      <p class="lede">
+        Everything on this page is a real weakness in the report. None of it is fatal. All of it
+        is survivable if you get there first — and one item, the ω error, converts from a
+        liability into the strongest thing you can say, because you found it and fixed it
+        yourself.
+      </p>
+
+      <div class="note good">
+        <p class="note-title">The principle</p>
+        <p>
+          An examiner who finds a flaw you did not know about learns that you do not know your
+          own work. An examiner who finds a flaw you name first, diagnose exactly, and have
+          already tested learns the opposite. The flaws are fixed; only the order of discovery
+          is still under your control.
+        </p>
+      </div>
+
+      <div class="qa-toolbar">
+        <input class="search" data-search type="search" placeholder="Filter questions…" aria-label="Filter questions">
+        <button class="btn" type="button" data-quiz>Quiz mode</button>
+        <button class="btn" type="button" data-reveal-all>Reveal all</button>
+        <span class="counter" data-counter></span>
+      </div>
+
+      <h2 data-qa-sec>Errors in the report</h2>
+
+      <article class="qa" id="omega">
+        <div class="qa-head"><span class="qa-id">W01</span>
+          <h3 class="qa-q">Your printed ω does not satisfy your own algebraic system. Explain.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Correct — it is a typesetting error. One χ too many survived inside the radical. B₁ is right; ω as printed is too large by a factor of √χ, and with the corrected value the solution satisfies the equation to numerical round-off.</p>
+          <p><strong>The diagnosis, precisely.</strong> With A₀ = A₁ = 0 the trial solution is u = B₁δ, and since δ′ = δ² + χ we get u″ = 2B₁δ³ + 2B₁χδ. Substituting into the real part (14) and collecting powers of δ gives exactly two conditions:</p>
+          <div class="eq plain">
+            <div>δ³ :  B₁(l² − ω²) + B₁³ = 0    ⟹   B₁² = ω² − l²
+
+δ¹ :  χ(l² − ω²) + ζ = 0       ⟹   ζ = χ(ω² − l²)</div>
+          </div>
+          <p>
+            Those are equations 1 and 3 of the report's own system (18), so the system is right.
+            Testing the printed constants against the first one at θ = 60°, χ = −5:
+            ω² − l² = 0.5022 but B₁² = −0.4004. They do not match.
+          </p>
+          <p>
+            <strong>The fix.</strong> The report prints ω = ½√(χ(2χl² − l² + 2m + √Δ)/χ), in
+            which the χ cancels. The correct expression has no leading χ:
+          </p>
+          <div class="eq">
+            <div>ω = ½ √( (2χl² − l² + 2m + √Δ) / χ )</div>
+          </div>
+          <p>
+            With that, ω² − l² = B₁² exactly, for both χ = −5 and χ = +5, and the residual of
+            Eq. (14) drops from order one to about 10<sup>−6</sup> — which is just the truncation
+            error of the finite difference used to test it.
+          </p>
+          <div class="note warn">
+            <p class="note-title">Be precise about what this does and does not establish</p>
+            <p>
+              It establishes that the printed ω is inconsistent with the report's own system, and
+              that a specific one-character correction removes the inconsistency. It does
+              <em>not</em> establish which value the original Maple worksheet used, because the
+              figures depend on ω, on y and on the Γ(β)/√β choice together, and the report fixes
+              none of the three. Say the first part with confidence and the second part as the
+              open question it is.
+            </p>
+          </div>
+          <div class="say">
+            <p class="say-label">Say this</p>
+            <p>
+              "There's a typo in the printed expression for ω — one χ too many survived inside
+              the radical. I found it when I went back and substituted the solution into the
+              equation, which the report itself never does. B₁ is correct as printed; the correct
+              ω is one over root chi times what's written. With that correction the solution
+              satisfies the reduced ODE to numerical round-off. B₁ is independently confirmed by
+              the figures — the plateau of the χ &lt; 0 branch is |B₁|√−χ, and that comes out at
+              2.267, 1.948 and 1.500 for the three angles in Figure 5, which reads 2.28, 1.96 and
+              1.51. So it's a transcription error in one line rather than a mistake in the
+              algebra."
+            </p>
+          </div>
+          <div class="note good">
+            <p class="note-title">You can demonstrate this live</p>
+            <p>
+              <a href="lab.html#c2">Cell 2 of the Python lab</a> prints the residual under both
+              values. It takes about ten seconds to run. If the conversation is technical and
+              going well, offering to show it is a strong move.
+            </p>
+          </div>
+        </div>
+        <div class="qa-tags"><span class="tag">error</span><span class="tag">critical</span><span class="tag">opportunity</span></div>
+      </article>
+
+      <article class="qa" id="w02">
+        <div class="qa-head"><span class="qa-id">W02</span>
+          <h3 class="qa-q">Equation (3) uses 1/Γ(β) but Equation (12) uses 1/√β. Which is right?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Γ(β) is right. The √β in the transformation is a transcription slip, and the cancellation that makes the whole method work only happens with the gamma form.</p>
+          <p>
+            The mechanism: the beta derivative is (x + 1/Γ(β))<sup>1−β</sup> d/dx. Applying it to
+            (1/β)(x + 1/Γ(β))<sup>β</sup> multiplies (x + …)<sup>1−β</sup> by
+            (x + …)<sup>β−1</sup>, which is exactly 1. That is why ᴬ₀𝔇<sup>β</sup>ξ = l and why β
+            vanishes from the reduced ODE. With 1/√β inside instead, the exponents no longer
+            cancel cleanly.
+          </p>
+          <p>
+            The practical impact is small: at β = 0.8, 1/Γ(0.8) ≈ 0.8935 against
+            1/√0.8 ≈ 1.1180. The wave shifts along ξ; nothing structural changes, and no
+            conclusion about θ or β is affected.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">error</span><span class="tag">fractional</span></div>
+      </article>
+
+      <article class="qa" id="w03">
+        <div class="qa-head"><span class="qa-id">W03</span>
+          <h3 class="qa-q">Your Eq. (15) gives cω² = l² − m, so c should be (l² − m)/ω². You wrote (l² − m)/ω.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Correct, that is an inconsistency, and reading straight off (15) the exponent should be ω².</p>
+          <p>
+            It has no effect on any figure, because c appears only in the phase φ, and the
+            solutions as printed in (19) and (20) drop the e<sup>iφ</sup> factor entirely — every
+            plot is of |U|, where a real phase contributes nothing.
+          </p>
+          <p>
+            Answer briefly and move on. Acknowledging a small slip crisply is fine; dwelling on it
+            makes it look larger than it is.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">error</span><span class="tag">minor</span></div>
+      </article>
+
+      <article class="qa" id="w04">
+        <div class="qa-head"><span class="qa-id">W04</span>
+          <h3 class="qa-q">Where did the e<sup>iφ</sup> go? Eq. (2) has it, Eqs. (19) and (20) do not.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">It was dropped in the final write-up. For plots of |U| it is harmless when φ is real, which is why the figures are still reproducible from the printed formulas — but the complete solution should carry it.</p>
+          <p>
+            The full solution is U = e<sup>iφ</sup>B₁δ(ξ) with φ given in (12). Since
+            |e<sup>iφ</sup>| = 1 for real φ, every figure in Chapter 4 is unaffected. Only the
+            phase structure is lost, and with it any discussion of the phase velocity c — which
+            is presumably why c never reappears after Eq. (16).
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">error</span><span class="tag">completeness</span></div>
+      </article>
+
+      <h2 data-qa-sec>Gaps in the work</h2>
+
+      <article class="qa" id="w05">
+        <div class="qa-head"><span class="qa-id">W05</span>
+          <h3 class="qa-q">You never verify that your solutions solve the original equation. Why not?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">It should have been there, and its absence is exactly what let the ω typo through. I have since done the check.</p>
+          <p>
+            Do not manufacture an excuse. The right answer names the consequence: without a
+            back-substitution check there was nothing to catch a transcription error between
+            Maple and the manuscript, and one got through. The correction is in W01, the test is
+            in the lab, and a residual plot is the first thing I would add to the report.
+          </p>
+          <p>This is the single clearest illustration you have of learning something from your own work. Use it.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">gap</span><span class="tag">critical</span></div>
+      </article>
+
+      <article class="qa" id="w06">
+        <div class="qa-head"><span class="qa-id">W06</span>
+          <h3 class="qa-q">What value of y did you use in the figures?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">The report does not record it. Every figure is drawn over x and t, so y is held at some fixed value that should have been stated in the captions.</p>
+          <p>
+            Say it plainly; there is no good way to bluff a number you do not have. Add what
+            <em>can</em> be said: y enters ξ only through the additive term
+            (m/β)(y + 1/√β)<sup>β</sup>, so changing it translates the profile along ξ and
+            changes nothing about amplitude, width or period. It affects where the wave sits,
+            not what it is.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">gap</span><span class="tag">reproducibility</span></div>
+      </article>
+
+      <article class="qa" id="w07">
+        <div class="qa-head"><span class="qa-id">W07</span>
+          <h3 class="qa-q">Your Figure 1 shows spikes reaching the top of the axis. Is that solution bounded?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">On the real line the solution is bounded — the apparent singularity is removable. The spikes come from the region where the transformation makes ξ complex, which is a property of the beta substitution rather than of the solution.</p>
+          <p>
+            <strong>Get this right; the obvious answer is wrong.</strong> It looks as though
+            Eq. (19) must blow up where its denominator P + S·sinh(a) = 0, i.e. sinh(a) = −P/S.
+            But the numerator contains cosh(a) and vanishes when cosh(a) = √(P²+S²)/S — and those
+            two conditions always coincide, because cosh²a − sinh²a = 1 gives
+            (P²+S²)/S² − P²/S² = 1 identically. So the limit is finite. On the real line
+            |δ| ≤ √−χ and therefore |U| ≤ |B₁|√−χ.
+          </p>
+          <p>
+            That bound is checkable against your own figures: |B₁|√5 is 2.267, 1.948 and 1.500 at
+            θ = 10°, 30° and 50°, and Figure 5 reads 2.28, 1.96 and 1.51. The plateau in the
+            figures <em>is</em> the bound.
+          </p>
+          <p>
+            So where do the spikes come from? There are genuine poles, but only at complex
+            arguments — sinh(a) = −P/S also has solutions with Im(a) = π, and there the numerator
+            is not zero. Those are reachable only where ξ itself is complex, that is where
+            x &lt; −1/√β ≈ −1.12 and (x + 1/√β)<sup>β</sup> is a fractional power of a negative
+            number. Every figure showing spikes plots x well below that threshold.
+          </p>
+          <div class="say">
+            <p class="say-label">Say this</p>
+            <p>
+              "The solution is bounded wherever ξ is real — the singularity you'd expect from the
+              denominator is removable, because the numerator vanishes at the same point; that
+              follows from cosh² − sinh² = 1. The bound is |B₁|√−χ, and that's exactly the plateau
+              in Figures 5 and 10. The spikes appear only for x below −1/√β, where the beta
+              transformation takes a fractional power of a negative number and ξ goes complex.
+              So they're an artefact of the transformation's branch cut rather than a feature of
+              the wave — which I'd argue is an issue with how far the plotting range was extended."
+            </p>
+          </div>
+          <p class="footnote">
+            That last observation is a genuine criticism of the report that you are making of your
+            own work, which is the strongest position to be in.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">gap</span><span class="tag">interpretation</span></div>
+      </article>
+
+      <article class="qa" id="w08">
+        <div class="qa-head"><span class="qa-id">W08</span>
+          <h3 class="qa-q">Are these solutions stable?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">I did not investigate stability, and the method gives no information about it.</p>
+          <p>
+            Then show you know what the investigation would be: linearise about the solution,
+            substitute U + εv, keep terms of first order in ε, and look for eigenvalues of the
+            resulting linear operator with positive real part. Numerically you would evolve the
+            exact solution with a small perturbation added and watch whether it grows.
+          </p>
+          <p>
+            You can also make a physical prediction: a singular solution is not a candidate for a
+            stable physical state, so the χ &lt; 0 branch would be the one to expect trouble
+            from.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">gap</span><span class="tag">theory</span></div>
+      </article>
+
+      <article class="qa" id="w09">
+        <div class="qa-head"><span class="qa-id">W09</span>
+          <h3 class="qa-q">Isn't this just applying a known method to another equation?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Substantially yes, and that is what an M.S. project is for. The method is cited; the application, the algebra and the parameter analysis are mine.</p>
+          <p>
+            Do not oversell. Say what is genuinely there: a specific equation, carried through
+            with a specific fractional operator, with a parameter study that produces a clear
+            and checkable claim — β rescales without touching amplitude, and it cannot do
+            otherwise because β never enters B₁.
+          </p>
+          <p>
+            If they press on novelty, the honest framing is that the contribution is
+            incremental and the value is in the training: I can take a nonlinear PDE, reduce it,
+            solve it, and now also verify it numerically.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">hard</span><span class="tag">framing</span></div>
+      </article>
+
+      <h2 data-qa-sec>Positioning</h2>
+
+      <article class="qa" id="w10">
+        <div class="qa-head"><span class="qa-id">W10</span>
+          <h3 class="qa-q">This is analytical work. We are a numerical group. Why should we take you?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Name the gap in one sentence, then show the bridge is already half built.</p>
+          <div class="say">
+            <p class="say-label">Say this</p>
+            <p>
+              "You're right that my project was analytical — I derived exact solutions, I didn't
+              discretise anything. Three things transfer. First, the PDE background is the same:
+              classification, dispersion relations, what the nonlinearity does. Second, exact
+              solutions are what you validate numerical schemes against, and mine are usable that
+              way. Third, I've since implemented the solutions in Python, reproduced my own
+              figures, and in doing it found and corrected an error in the published constants —
+              so I've already done the numerical verification the report was missing. What I
+              haven't done is write a solver for this equation, and that's what I'd want to start
+              with."
+            </p>
+          </div>
+          <p>
+            The last sentence matters. Naming what you have not done, precisely, makes everything
+            before it credible.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">fit</span><span class="tag">critical</span></div>
+      </article>
+
+      <article class="qa" id="w11">
+        <div class="qa-head"><span class="qa-id">W11</span>
+          <h3 class="qa-q">Your degree is in mathematics but you have been working as a software developer. Why the switch back?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Answer it as a combination rather than a reversal — the programming is an asset in computational science, not a detour away from it.</p>
+          <p>
+            The credible version: six years of professional software engineering means you write
+            code that other people can run, you use version control properly, you test, and you
+            can handle data and performance work. Those are exactly the skills most maths
+            graduates entering a computational group lack, and supervisors know it.
+          </p>
+          <p>
+            Be straightforward about motivation and do not invent a grand narrative. A plain,
+            true reason delivered directly is more convincing than a rehearsed story.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">behavioural</span><span class="tag">fit</span></div>
+      </article>
+
+      <article class="qa" id="w12">
+        <div class="qa-head"><span class="qa-id">W12</span>
+          <h3 class="qa-q">A question you genuinely cannot answer.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">"I don't know" — then say what you would do to find out, or what you do know that is adjacent.</p>
+          <p>
+            Panels are not testing whether you know everything; they are testing what you do at
+            the edge of your knowledge, because that is where a research student lives. A
+            confident wrong answer is much worse than an honest gap, and it is usually obvious.
+          </p>
+          <div class="say">
+            <p class="say-label">The shape of a good non-answer</p>
+            <p>
+              "I haven't worked with that. What I do know is [adjacent thing], and I'd expect
+              [reasoned guess] — but I'd want to check that rather than assert it."
+            </p>
+          </div>
+        </div>
+        <div class="qa-tags"><span class="tag">technique</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

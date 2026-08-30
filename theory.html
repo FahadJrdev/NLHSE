@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What the equation is — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="theory">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">What the equation is</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">02 · The mathematics</p>
+      <h1>What the equation is, and why each term is there</h1>
+      <p class="lede">
+        You will be asked to explain your own governing equation term by term. This page is
+        that explanation. It also settles the question that catches people out: what the word
+        <em>hyperbolic</em> is doing in the title.
+      </p>
+
+      <nav class="jump">
+        <a href="#eq">The equation</a>
+        <a href="#terms">Term by term</a>
+        <a href="#hyperbolic">Why "hyperbolic"</a>
+        <a href="#solitons">Solitons</a>
+        <a href="#travelling">Travelling waves</a>
+        <a href="#physics">The physical reading</a>
+      </nav>
+
+      <h2 id="eq">The equation</h2>
+      <div class="eq">
+        <div>iU<sub>y</sub> + ½ (U<sub>xx</sub> − U<sub>tt</sub>) + |U|²U = 0</div>
+        <span class="num">(1)</span>
+      </div>
+      <p>
+        U = U(x, y, t) is complex-valued. It is the slowly varying <strong>envelope</strong> of
+        the optical field, not the field itself — the fast carrier oscillation has already been
+        factored out, which is why the equation is first order in the evolution variable and
+        why U is complex.
+      </p>
+
+      <h2 id="terms">Term by term</h2>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Term</th><th>Name</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>iU<sub>y</sub></code></td>
+              <td>Evolution</td>
+              <td>First order, with an <em>i</em> in front. The <em>i</em> is what makes the equation
+                  dispersive rather than diffusive: it rotates the phase instead of damping the
+                  amplitude. Note the evolution variable here is <strong>y</strong>, not t.</td>
+            </tr>
+            <tr>
+              <td><code>½U<sub>xx</sub></code></td>
+              <td>Dispersion</td>
+              <td>Spreads a pulse out. Different frequency components travel at different speeds,
+                  so a localised packet broadens.</td>
+            </tr>
+            <tr>
+              <td><code>−½U<sub>tt</sub></code></td>
+              <td>Dispersion, opposite sign</td>
+              <td>The same second-derivative structure in t, but subtracted. This sign flip is
+                  the entire reason for the word "hyperbolic".</td>
+            </tr>
+            <tr>
+              <td><code>|U|²U</code></td>
+              <td>Kerr nonlinearity</td>
+              <td>Cubic, focusing. The medium's refractive index depends on intensity, so an
+                  intense pulse digs its own potential well and self-focuses.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note good">
+        <p class="note-title">The one-sentence physics</p>
+        <p>
+          A soliton exists because the spreading from the dispersion terms and the focusing
+          from the cubic term cancel exactly. Change either one and the balance breaks.
+        </p>
+      </div>
+
+      <h2 id="hyperbolic">Why "hyperbolic" — the question people fumble</h2>
+      <p>
+        In the standard (2+1)-dimensional NLS the two second derivatives carry the
+        <em>same</em> sign: U<sub>xx</sub> + U<sub>yy</sub>, an elliptic operator. Here they
+        carry <em>opposite</em> signs: U<sub>xx</sub> − U<sub>tt</sub>. That operator is the
+        wave operator, and it is <strong>hyperbolic</strong> in the standard PDE classification.
+        Hence "nonlinear hyperbolic Schrödinger equation".
+      </p>
+      <p>
+        The distinction is not cosmetic. It is also called the <em>elliptic–hyperbolic</em> or
+        anomalous-dispersion distinction, and it changes the character of the solutions: the
+        elliptic case is the focusing NLS with its familiar bright soliton, while the
+        hyperbolic case supports X-wave and oblique structures — which is precisely why the
+        oblique angle θ is a parameter worth varying in your Chapter 4.
+      </p>
+
+      <div class="say">
+        <p class="say-label">Say this if asked "why hyperbolic?"</p>
+        <p>
+          "Because the two second-order derivatives enter with opposite signs — U<sub>xx</sub>
+          minus U<sub>tt</sub> rather than plus. That makes the linear operator the wave
+          operator, which is hyperbolic in the usual classification, rather than the Laplacian,
+          which is elliptic. Physically it corresponds to anomalous dispersion in one of the two
+          coordinates, and it is what makes oblique propagation an interesting parameter."
+        </p>
+      </div>
+
+      <h2 id="solitons">Solitons — what the word commits you to</h2>
+      <p>
+        A soliton, strictly, is a localised travelling wave that (i) keeps its shape, (ii)
+        travels at constant speed, and (iii) survives collision with another one, emerging
+        with only a phase shift. Condition (iii) is the strong one and is tied to complete
+        integrability.
+      </p>
+      <div class="note warn">
+        <p class="note-title">Be careful with the word</p>
+        <p>
+          Your report says the Unified Technique is "an effective tool for deriving soliton
+          wave solutions". What you actually derived are <strong>exact travelling-wave
+          solutions</strong> of soliton <em>type</em> — you did not test collisions, and you did
+          not establish integrability of this equation. If pressed, say "solitary wave" or
+          "exact travelling-wave solution". That is the defensible claim, and volunteering the
+          distinction reads as rigour rather than retreat.
+        </p>
+      </div>
+      <p>
+        Worth knowing about the two families you found:
+      </p>
+      <ul>
+        <li>
+          <strong>χ &lt; 0 → hyperbolic functions (cosh, sinh).</strong> On the real line this
+          is a <strong>kink</strong>, not a peak: δ → ∓√−χ as ξ → ±∞, so |U| approaches the
+          same plateau |B₁|√−χ on both sides with a localised feature in between. It is
+          bounded — see the note below, which is a point worth being precise about.
+        </li>
+        <li>
+          <strong>χ &gt; 0 → trigonometric functions (cos, sin).</strong> Periodic, not
+          localised. Bounded wherever P + S·sin(·) stays away from zero, which for P &gt; S
+          it does. This is Figure 2.
+        </li>
+      </ul>
+
+      <div class="note good">
+        <p class="note-title">The removable singularity — a detail worth owning</p>
+        <p>
+          It looks as though Eq. (19) must blow up: its denominator P + S·sinh(a) vanishes when
+          sinh(a) = −P/S, and with P = 3, S = 2 that happens at a real value of a. But the
+          numerator vanishes at exactly the same point. It contains cosh(a), and it is zero when
+          cosh(a) = √(P² + S²)/S. Those two conditions are compatible for every P and S, because
+        </p>
+        <div class="eq"><div>cosh²a − sinh²a = (P² + S²)/S² − P²/S² = 1</div></div>
+        <p>
+          which is an identity, not a coincidence. So the singularity is <strong>removable</strong>:
+          δ has a finite limit there, and on the real line |δ| ≤ √−χ, so |U| ≤ |B₁|√−χ.
+        </p>
+        <p>
+          That bound is not abstract — it is the plateau in your own figures. |B₁|√5 evaluates
+          to 2.267, 1.948 and 1.500 at θ = 10°, 30° and 50°, and Figure 5 reads 2.28, 1.96 and
+          1.51 off the plot. At θ = 60° it gives 1.415 against Figure 10's ≈ 1.44.
+        </p>
+        <p>
+          Genuine poles do exist, but only at <em>complex</em> arguments — where sinh(a) = −P/S
+          with Im(a) = π, at which the numerator is not zero. Those are reachable only where ξ
+          itself is complex, that is where x &lt; −1/√β and the transformation takes a fractional
+          power of a negative number. <strong>The spikes in Figure 1 come from the branch cut of
+          the transformation, not from the solution being singular.</strong> See
+          <a href="qa-weakspots.html#w07">page 09</a>.
+        </p>
+      </div>
+
+      <h2 id="travelling">The travelling-wave idea</h2>
+      <p>
+        The whole method rests on one assumption: that a solution exists which depends on x,
+        y and t only through a single combination ξ = lx + my − ωt, multiplied by a phase.
+      </p>
+      <div class="eq">
+        <div>U(x, y, t) = e<sup>iφ</sup> u(ξ)</div>
+        <span class="num">(2)</span>
+      </div>
+      <p>
+        Geometrically: the solution is a fixed profile u sliding rigidly through space. In the
+        frame moving with the wave nothing changes. That is what reduces three independent
+        variables to one and turns the PDE into an ODE — the single most important step in
+        the report, and the first thing to be able to justify.
+      </p>
+      <p>
+        The cost is equally important to state: <strong>this is an ansatz, not a derivation</strong>.
+        You are not finding all solutions of the PDE. You are finding the ones of this
+        particular shape. Solutions that change form as they propagate — which is most of them —
+        are outside what the method can see.
+      </p>
+
+      <h2 id="physics">The physical reading</h2>
+      <p>
+        The report motivates the equation as a model for "how the optics signal spreads in
+        single-mode fibre optics". Concretely: an optical pulse travelling down a fibre
+        broadens because of dispersion and self-focuses because of the Kerr effect. When
+        those balance, the pulse propagates undistorted — the physical basis of soliton
+        communication, where the pulse shape itself carries the bit and does not need
+        periodic reshaping.
+      </p>
+      <p>
+        The parameters you vary have readings too. <strong>θ</strong>, through l = cos θ and
+        m = sin θ, is the direction the wave travels relative to the axes — the obliqueness.
+        <strong>β</strong> is the fractional order, which the report interprets as memory or
+        non-local response in the medium. And <strong>χ</strong> selects which family of
+        auxiliary solutions you land in, and so whether the result is localised or periodic.
+      </p>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

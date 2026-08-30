@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python lab — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="lab">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">Python lab</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col col-wide">
+
+      <p class="eyebrow">11 · Programming</p>
+      <h1>Python lab — run your own solutions</h1>
+      <p class="lede">
+        Real Python, running inside this page. No install, no server, no account. Every cell
+        is editable: change a number, press <strong>Run</strong>, see what happens. Being able
+        to say <em>"I reproduced my figures numerically, and here is the code"</em> changes an
+        interview.
+      </p>
+
+      <div class="note info">
+        <p class="note-title">How it works · <span class="chip" data-py-status>Python not started</span></p>
+        <p>
+          The first Run downloads Pyodide — CPython compiled to WebAssembly — from a CDN,
+          about fifteen seconds on a decent connection. After that everything is instant.
+          <strong>All the cells on this page share one interpreter</strong>, so run them in
+          order: Cell 1 defines the functions the others use. <kbd>Ctrl</kbd>+<kbd>Enter</kbd>
+          runs the cell you are typing in. Requires an internet connection the first time.
+        </p>
+      </div>
+
+      <nav class="jump">
+        <a href="#c1">1 · The constants</a>
+        <a href="#c2">2 · Does it solve the ODE?</a>
+        <a href="#c3">3 · Reproduce Fig 6</a>
+        <a href="#c4">4 · Reproduce Fig 9</a>
+        <a href="#c5">5 · Reproduce Fig 11</a>
+        <a href="#c6">6 · The 3D surface</a>
+        <a href="#c7">7 · Is it singular?</a>
+        <a href="#c8">8 · Playground</a>
+      </nav>
+
+      <h2 id="c1">1 · The constants, and one correction</h2>
+      <p>
+        This cell implements Eqs. (10)–(12) and (18)–(20) directly. Two things are worth
+        knowing before you read it.
+      </p>
+      <p>
+        <strong>Everything is complex.</strong> At θ = 60° the radicand of B₁ is negative, so
+        B₁ ≈ 0.633i. So is √(−5P² + 5S²) with P = 3, S = 2. And (x + 1/√β)<sup>β</sup> is a
+        fractional power of a possibly negative number. Every square root here uses
+        <code>np.emath.sqrt</code>, which returns a complex result instead of <code>nan</code>,
+        and the plots show <code>np.abs(U)</code>. This is not a workaround — it is what the
+        solutions actually are.
+      </p>
+      <p>
+        <strong>The <code>fix_omega</code> flag.</strong> The report prints
+        ω = ½√(χ(…)/χ), in which the χ cancels. Set <code>fix_omega=False</code> to use it
+        exactly as printed; leave it <code>True</code> for ω = ½√((…)/χ). Cell 2 shows why
+        that matters.
+      </p>
+
+      <div class="runner" id="c1">
+        <div class="runner-head">
+          <span class="runner-title">Cell 1 — constants and solution</span>
+          <button class="btn" type="button" data-reset>Reset</button>
+          <button class="btn btn-run" type="button">▶ Run</button>
+        </div>
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 1">import numpy as np
+
+SQ = np.emath.sqrt            # complex-safe square root: SQ(-4) -> 2j
+
+def constants(theta_deg=60.0, chi=-5.0, fix_omega=True):
+    """The constants of Eq. (18). l = cos(theta), m = sin(theta)."""
+    th = np.deg2rad(theta_deg)
+    l, m = np.cos(th), np.sin(th)
+
+    Delta = (4*chi**2*l**4 - 12*chi*l**4 + 8*chi*l**2*m + l**4
+             - 8*chi*m**2 - 4*l**2*m + 16*l**2*m*chi + 4*m**2)
+    bracket = 2*chi*l**2 - l**2 + 2*m + SQ(Delta)
+
+    omega = 0.5*SQ(bracket/chi) if fix_omega else 0.5*SQ(bracket)
+    B1    = SQ(-0.25*(2*chi*l**2 + l**2 - SQ(Delta) - 2*m)/chi)
+    zeta  = m - 0.5*l**2 - 0.5*(l**4 - 2*l**2*m + m**2)/omega**2
+    return dict(l=l, m=m, omega=complex(omega), B1=complex(B1),
+                zeta=complex(zeta), chi=chi)
+
+def xi_of(x, y, t, k, beta=0.8):
+    """Eq. (12). The report writes 1/sqrt(beta); Gamma(beta) is the standard form."""
+    s = 1.0/np.sqrt(beta)
+    p = lambda v: np.power(np.asarray(v, dtype=complex) + s, beta)
+    return (k['l']/beta)*p(x) + (k['m']/beta)*p(y) - (k['omega']/beta)*p(t)
+
+def delta(xi, chi, P=3.0, S=2.0, R=3.0):
+    """Eqs. (10) and (11) -- the solution of delta' = delta^2 + chi."""
+    xi = np.asarray(xi, dtype=complex)
+    if chi < 0:
+        q = 2*SQ(-chi)
+        return (SQ(chi*(-(P**2 + S**2))) - S*SQ(-chi)*np.cosh(q*(xi + R))) \
+               / (P + S*np.sinh(q*(xi + R)))
+    q = 2*SQ(chi)
+    return (SQ(chi*(S**2 - P**2)) - S*SQ(chi)*np.cos(q*(xi + R))) \
+           / (P + S*np.sin(q*(xi + R)))
+
+def U(x, y, t, theta_deg=60.0, chi=-5.0, beta=0.8,
+      P=3.0, S=2.0, R=3.0, fix_omega=True):
+    """Eqs. (19) and (20).  A0 = A1 = 0, so u(xi) = B1 * delta(xi)."""
+    k = constants(theta_deg, chi, fix_omega)
+    return k['B1'] * delta(xi_of(x, y, t, k, beta), chi, P, S, R)
+
+for chi in (-5.0, 5.0):
+    kp = constants(60.0, chi, fix_omega=False)
+    kf = constants(60.0, chi, fix_omega=True)
+    print(f"chi = {chi:+.0f}    l = {kf['l']:.4f}   m = {kf['m']:.4f}")
+    print(f"   omega as printed : {kp['omega']:.6f}")
+    print(f"   omega corrected  : {kf['omega']:.6f}")
+    print(f"   B1               : {kf['B1']:.6f}")
+    print(f"   B1^2             = {kf['B1']**2:+.8f}")
+    print(f"   omega^2 - l^2    = {kf['omega']**2 - kf['l']**2:+.8f}  <- must match B1^2")
+    print()</textarea>
+        <pre class="out"></pre>
+        <div class="figs"></div>
+      </div>
+
+      <div class="note good">
+        <p class="note-title">What Cell 1 shows</p>
+        <p>
+          The last two lines of each block must agree, because the first equation of the
+          report's system (18) is B₁(l² − ω²) + B₁³ = 0, which rearranges to
+          <strong>B₁² = ω² − l²</strong>. With the corrected ω they agree to fifteen digits.
+          With ω exactly as printed they do not — that is the whole finding, and Cell 2
+          measures it.
+        </p>
+      </div>
+
+      <h2 id="c2">2 · Does the solution actually solve the equation?</h2>
+      <p>
+        The report never checks this, and it is the first thing a careful examiner would ask.
+        Substitute u = B₁δ into the real part, Eq. (14), and measure what is left over. If the
+        solution is right the residual should be zero up to the finite-difference error of the
+        second derivative — about 10<sup>−6</sup> with h = 10<sup>−5</sup>.
+      </p>
+
+      <div class="runner">
+        <div class="runner-head">
+          <span class="runner-title">Cell 2 — residual of Eq. (14)</span>
+          <button class="btn" type="button" data-reset>Reset</button>
+          <button class="btn btn-run" type="button">▶ Run</button>
+        </div>
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 2">def ode_residual(theta_deg=60.0, chi=-5.0, fix_omega=True, h=1e-5):
+    """Residual of  0.5*u''*(l^2 - omega^2) + zeta*u + u^3  =  0."""
+    k = constants(theta_deg, chi, fix_omega)
+    u = lambda xi: k['B1']*delta(xi, chi)
+    xi  = np.linspace(-2, 2, 401)
+    upp = (u(xi + h) - 2*u(xi) + u(xi - h))/h**2          # central difference
+    r   = 0.5*upp*(k['l']**2 - k['omega']**2) + k['zeta']*u(xi) + u(xi)**3
+    ok  = np.isfinite(r)
+    return np.max(np.abs(r[ok])) / np.max(np.abs(u(xi)[ok]**3))
+
+print(f"{'chi':>5}  {'omega':>12}  {'relative residual':>18}")
+print("-"*40)
+for chi in (-5.0, 5.0):
+    print(f"{chi:+5.0f}  {'as printed':>12}  {ode_residual(60, chi, False):18.3e}")
+    print(f"{chi:+5.0f}  {'corrected':>12}  {ode_residual(60, chi, True):18.3e}")
+
+# And separately: does delta really satisfy delta' = delta^2 + chi?
+for chi in (-5.0, 5.0):
+    xi, h = np.linspace(-2, 2, 401), 1e-6
+    dp = (delta(xi + h, chi) - delta(xi - h, chi))/(2*h)
+    err = np.nanmax(np.abs(dp - (delta(xi, chi)**2 + chi)))
+    print(f"chi={chi:+.0f}:  max|delta' - (delta^2 + chi)| = {err:.2e}")</textarea>
+        <pre class="out"></pre>
+        <div class="figs"></div>
+      </div>
+
+      <div class="note risk">
+        <p class="note-title">Read this result carefully — it is the strongest card you hold</p>
+        <p>
+          With ω <strong>as printed</strong> the relative residual is about 0.76 for χ = −5 and
+          81 for χ = +5 — the solution does not satisfy the equation at all. With ω
+          <strong>corrected</strong> it drops to ~10<sup>−6</sup>, which is exactly the
+          truncation error of the central difference. Meanwhile δ satisfies its own ODE to
+          10<sup>−8</sup> either way, so Eqs. (10) and (11) are fine.
+        </p>
+        <p>
+          The conclusion is precise and limited: <strong>B₁ is correct, and the printed ω is
+          too large by a factor of √χ.</strong> The radical in the report reads
+          √(χ(…)/χ), where it should read √((…)/χ) — one χ too many survived into the
+          numerator. Everything amplitude-related in the figures reproduces exactly, which
+          independently confirms B₁; what value of ω the original Maple worksheet used cannot be
+          determined from the report, because the plots also depend on y, which is never stated.
+          See <a href="qa-weakspots.html#omega">page 09</a> for how to say this out loud.
+        </p>
+      </div>
+
+      <h2 id="c3">3 · Reproduce Figure 6 — obliqueness</h2>
+      <p>
+        Your report's clearest result: as θ grows the peaks shrink and broaden. The published
+        figure shows peak heights of about 1.85, 1.17 and 0.65.
+      </p>
+
+      <div class="runner">
+        <div class="runner-head">
+          <span class="runner-title">Cell 3 — Figure 6</span>
+          <button class="btn" type="button" data-reset>Reset</button>
+          <button class="btn btn-run" type="button">▶ Run</button>
+        </div>
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 3">import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 2000)
+fig, ax = plt.subplots()
+
+for th in (10, 20, 30):
+    a = np.abs(U(x, 1.0, 0.0, theta_deg=th, chi=5.0, beta=0.8))
+    ax.plot(x, a, label=f"theta = {th}")
+    print(f"theta = {th:2d} deg   peak |U| = {a.max():.4f}")
+
+ax.set_xlabel("x"); ax.set_ylabel("|U|")
+ax.set_title("Figure 6 reproduced — obliqueness of $U_v$, $\\chi = +5$")
+ax.legend()
+print("\nreport shows roughly 1.85, 1.17, 0.65")</textarea>
+        <pre class="out"></pre>
+        <div class="figs"></div>
+      </div>
+
+      <h2 id="c4">4 · Reproduce Figure 9 — the fractional order</h2>
+      <p>
+        The claim to test: β changes the horizontal scale and leaves the amplitude alone,
+        because β appears only inside ξ and never touches B₁. If that is right, all three
+        curves must peak at exactly the same height.
+      </p>
+
+      <div class="runner">
+        <div class="runner-head">
+          <span class="runner-title">Cell 4 — Figure 9</span>
+          <button class="btn" type="button" data-reset>Reset</button>
+          <button class="btn btn-run" type="button">▶ Run</button>
+        </div>
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 4">x = np.linspace(0, 15, 4000)
+fig, ax = plt.subplots()
+
+for b in (0.6, 0.7, 0.8):
+    a = np.abs(U(x, 1.0, 0.0, theta_deg=50, chi=5.0, beta=b))
+    ax.plot(x, a, label=f"beta = {b}")
+    print(f"beta = {b}   peak |U| = {a.max():.6f}")
+
+ax.set_xlabel("x"); ax.set_ylabel("|U|")
+ax.set_title("Figure 9 reproduced — beta variation, $\\theta = 50^\\circ$")
+ax.legend()
+print("\nIdentical peaks => beta cannot touch the amplitude. It lives only inside xi.")</textarea>
+        <pre class="out"></pre>
+        <div class="figs"></div>
+      </div>
+
+      <h2 id="c5">5 · Reproduce Figure 11 — time</h2>
+      <p>
+        The published axis runs from 0.10 to 0.49. This cell prints the computed range so you can
+        compare directly — it matches to three decimal places, and the range is independent of ω,
+        so it confirms B₁. It also shows how differently the two candidate ω values move the
+        curve in time, though that does not settle which one Maple used, because the unstated
+        value of y shifts ξ as well.
+      </p>
+
+      <div class="runner">
+        <div class="runner-head">
+          <span class="runner-title">Cell 5 — Figure 11</span>
+          <button class="btn" type="button" data-reset>Reset</button>
+          <button class="btn btn-run" type="button">▶ Run</button>
+        </div>
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 5">x = np.linspace(0, 16, 4000)
+fig, ax = plt.subplots()
+
+for t in (4, 8, 12):
+    a = np.abs(U(x, 1.0, float(t), theta_deg=60, chi=5.0, beta=0.8))
+    ax.plot(x, a, label=f"t = {t}")
+
+ax.set_xlabel("x"); ax.set_ylabel("|U|")
+ax.set_title("Figure 11 reproduced — time variation, $\\theta = 60^\\circ$")
+ax.legend()
+
+a = np.abs(U(x, 1.0, 4.0, theta_deg=60, chi=5.0, beta=0.8))
+print(f"|U| range at t = 4 : {a.min():.4f} to {a.max():.4f}")
+print("report's axis      : 0.10 to 0.49")
+
+# The two omega values shift the curve differently in time. Note this does NOT
+# settle which one Maple used: the plots also depend on y, which the report never
+# states, and y shifts xi too.
+fine = np.linspace(0, 16, 40000)
+for fix in (False, True):
+    pk = []
+    for t in (4.0, 12.0):
+        v = np.abs(U(fine, 1.0, t, theta_deg=60, chi=5.0, beta=0.8, fix_omega=fix))
+        i = np.where((v[1:-1] > v[:-2]) & (v[1:-1] > v[2:]))[0] + 1
+        pk.append(fine[i])
+    n = min(len(pk[0]), len(pk[1]))
+    shift = (pk[1][:n] - pk[0][:n]).mean()
+    print(f"omega {'corrected' if fix else 'as printed'}: "
+          f"mean peak shift t=4 -> t=12 = {shift:+.2f}")</textarea>
+        <pre class="out"></pre>
+        <div class="figs"></div>
+      </div>
+
+      <h2 id="c6">6 · The 3D surface — Figures 1 and 2</h2>
+      <p>
+        The χ = −5 branch is unbounded, so the surface has to be clipped to be readable —
+        exactly what Maple did when it stopped the axis at 9. Change <code>chi</code> to
+        <code>5.0</code> to get the bounded periodic surface of Figure 2 instead.
+      </p>
+
+      <div class="runner">
+        <div class="runner-head">
+          <span class="runner-title">Cell 6 — 3D surface</span>
+          <button class="btn" type="button" data-reset>Reset</button>
+          <button class="btn btn-run" type="button">▶ Run</button>
+        </div>
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 6">chi   = -5.0                 # try +5.0 for Figure 2
+clip  = 9.0                  # Maple's axis stopped here
+
+xs = np.linspace(-25, 5, 260) if chi < 0 else np.linspace(-8, 0, 260)
+ts = np.linspace(0, 15, 260) if chi < 0 else np.linspace(0, 10, 260)
+X, T = np.meshgrid(xs, ts)
+
+A = np.abs(U(X, 1.0, T, theta_deg=60, chi=chi, beta=0.8))
+print(f"true max over the window : {np.nanmax(A):.2f}")
+A = np.clip(A, 0, clip)
+
+fig = plt.figure(figsize=(7.6, 5.2))
+ax = fig.add_subplot(111, projection="3d")
+ax.plot_surface(X, T, A, cmap="magma" if chi < 0 else "viridis",
+                linewidth=0, antialiased=True, rcount=120, ccount=120)
+ax.set_xlabel("x"); ax.set_ylabel("t"); ax.set_zlabel("|U|")
+ax.set_title(f"$\\chi = {chi:+.0f}$  (clipped at {clip})")
+ax.view_init(elev=26, azim=-56)</textarea>
+        <pre class="out"></pre>
+        <div class="figs"></div>
+      </div>
+
+      <h2 id="c7">7 · Is the χ &lt; 0 branch actually singular?</h2>
+      <p>
+        The natural assumption is that Eq. (19) blows up where its denominator
+        P + S·sinh(2√−χ(ξ+R)) vanishes. This cell tests that assumption, and it fails: the
+        numerator vanishes at the same point, so the singularity is removable and the solution
+        is bounded on the real line by |B₁|√−χ — which is exactly the plateau in Figures 5
+        and 10.
+      </p>
+
+      <div class="runner">
+        <div class="runner-head">
+          <span class="runner-title">Cell 7 — the removable singularity</span>
+          <button class="btn" type="button" data-reset>Reset</button>
+          <button class="btn btn-run" type="button">▶ Run</button>
+        </div>
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 7">P, S, R, chi = 3.0, 2.0, 3.0, -5.0
+q = -chi
+
+# where each part of delta vanishes, for REAL argument a
+a_den = np.arcsinh(-P/S)                    # denominator zero
+a_num = np.arccosh(np.sqrt(P**2 + S**2)/S)  # numerator zero (two roots, +/-)
+print(f"denominator zero at a = {a_den:.8f}")
+print(f"numerator   zero at a = {-a_num:.8f}  (taking the negative root)")
+print("identical, because cosh^2 - sinh^2 = (P^2+S^2)/S^2 - P^2/S^2 = 1")
+
+xi0 = a_den/(2*np.sqrt(q)) - R
+print(f"\n=> removable singularity at xi = {xi0:.6f}")
+for d in (1e-2, 1e-4, 1e-6, 1e-8):
+    print(f"   delta(xi0 + {d:<7.0e}) = {complex(delta(xi0 + d, chi)):.8f}")
+
+# the bound on the real line
+xi = np.linspace(-9, 5, 200001)
+v  = np.abs(delta(xi, chi))
+print(f"\nmax |delta| over real xi = {np.nanmax(v):.6f}   vs   sqrt(-chi) = {np.sqrt(q):.6f}")
+
+for th in (10, 30, 50, 60):
+    k = constants(th, chi)
+    print(f"   theta = {th:2d} deg -> plateau |B1|*sqrt(-chi) = {abs(k['B1'])*np.sqrt(q):.4f}")
+print("   report reads 2.28, 1.96, 1.51 (Fig 5) and about 1.44 (Fig 10)")
+
+fig, ax = plt.subplots()
+ax.plot(xi, np.real(delta(xi, chi)))
+ax.axvline(xi0, lw=1, ls="--")
+ax.set_xlabel("$\\xi$"); ax.set_ylabel("$\\delta(\\xi)$")
+ax.set_title("No pole: $\\delta$ passes smoothly through $\\xi_0$")</textarea>
+        <pre class="out"></pre>
+        <div class="figs"></div>
+      </div>
+
+      <div class="note good">
+        <p class="note-title">So where do Figure 1's spikes come from?</p>
+        <p>
+          From the transformation, not the solution. sinh(a) = −P/S also has roots with
+          Im(a) = π, and there the numerator is <em>not</em> zero — those are genuine poles. They
+          are reachable only when ξ is complex, which happens when
+          x &lt; −1/√β ≈ −1.12, because (x + 1/√β)<sup>β</sup> is then a fractional power of a
+          negative number. Every figure that shows spikes plots x far below that threshold.
+        </p>
+      </div>
+
+      <h2 id="c8">8 · Playground</h2>
+      <p>
+        Empty cell, same interpreter — every function from Cell 1 is still defined. numpy,
+        matplotlib, scipy, sympy and pandas are all available. Good things to try: set
+        <code>S</code> larger than <code>P</code> and see the periodic branch develop poles;
+        sweep θ from 0 to 90 and plot peak amplitude against angle; compare 1/√β with 1/Γ(β)
+        in the transformation.
+      </p>
+
+      <div class="runner">
+        <div class="runner-head">
+          <span class="runner-title">Cell 8 — yours</span>
+          <button class="btn" type="button" data-reset>Reset</button>
+          <button class="btn btn-run" type="button">▶ Run</button>
+        </div>
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 8"># Peak amplitude against oblique angle — the trend behind Figures 5 and 6.
+angles = np.arange(5, 86, 2.5)
+peaks  = []
+x = np.linspace(0, 10, 1500)
+
+for th in angles:
+    peaks.append(np.abs(U(x, 1.0, 0.0, theta_deg=float(th), chi=5.0, beta=0.8)).max())
+
+fig, ax = plt.subplots()
+ax.plot(angles, peaks, marker="o", ms=3)
+ax.set_xlabel("oblique angle $\\theta$ (degrees)")
+ax.set_ylabel("peak $|U|$")
+ax.set_title("Amplitude falls monotonically with obliqueness")
+
+for th in (10, 20, 30):
+    i = int(np.argmin(np.abs(angles - th)))
+    print(f"theta = {th:2d} deg -> peak {peaks[i]:.3f}")</textarea>
+        <pre class="out"></pre>
+        <div class="figs"></div>
+      </div>
+
+      <div class="note warn">
+        <p class="note-title">If you demonstrate this live</p>
+        <p>
+          Load the page and run Cell 1 <em>before</em> the call starts, so Pyodide is already
+          downloaded. Then Cells 2 and 5 are the ones to show: one proves you checked your own
+          algebra, the other reproduces a published figure in front of them. Together they take
+          under a minute and they answer the question nobody asked out loud — whether you
+          actually understand the work or only wrote it up.
+        </p>
+      </div>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

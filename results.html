@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The eleven figures — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="results">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">The eleven figures</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col col-wide">
+
+      <p class="eyebrow">06 · The mathematics</p>
+      <h1>The eleven figures, and what each one is evidence for</h1>
+      <p class="lede">
+        These are your own Maple plots, lifted straight out of the report. A figure you cannot
+        explain is worse than no figure at all, so each one below carries its exact parameter
+        set and the single claim it supports.
+      </p>
+
+      <nav class="jump">
+        <a href="#base">Base profiles</a>
+        <a href="#oblique">Obliqueness</a>
+        <a href="#beta">Beta variation</a>
+        <a href="#time">Time</a>
+        <a href="#summary">The parameter story</a>
+        <a href="#gaps">What the figures do not say</a>
+      </nav>
+
+      <div class="note info">
+        <p class="note-title">Shared setup</p>
+        <p>
+          Unless stated otherwise: <strong>P = 3, S = 2, R = 3</strong>. U<sub>τ</sub> is the
+          χ = −5 branch, Eq. (19); U<sub>υ</sub> is the χ = +5 branch, Eq. (20). Every vertical
+          axis is <strong>|U|</strong> — the modulus, because these solutions are
+          complex-valued. l = cos θ, m = sin θ.
+        </p>
+      </div>
+
+      <h2 id="base">Figures 1–4 · The base profiles</h2>
+
+      <figure class="fig">
+        <img src="figures/fig-01.png" alt="3D surface of |U_tau| over x and t showing three tall narrow spikes on a flat plateau">
+        <figcaption>
+          <span class="fig-n">Figure 1</span>
+          Wave profile of U<sub>τ</sub>(x, y, t) for θ = 60°, P = 3, S = 2, R = 3, χ = −5, β = 0.8.
+          <strong>The claim:</strong> the χ &lt; 0 branch is a localised structure on a plateau.
+          <strong>What is really there:</strong> the plateau is exactly |B₁|√−χ = 1.415, and the
+          solution is bounded wherever ξ is real. The spikes are not a property of Eq. (19) — they
+          appear only where x &lt; −1/√β ≈ −1.12, the region in which (x + 1/√β)<sup>β</sup> is a
+          fractional power of a negative number and ξ becomes complex. The vertical axis stops at
+          9 because Maple clipped it.
+        </figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="figures/fig-02.png" alt="3D surface of |U_upsilon| showing a regular corrugated periodic pattern">
+        <figcaption>
+          <span class="fig-n">Figure 2</span>
+          Wave profile of U<sub>υ</sub>(x, y, t) for θ = 60°, P = 3, S = 2, R = 3, χ = 5, β = 0.8.
+          <strong>The claim:</strong> the χ &gt; 0 branch is periodic and bounded.
+          Note the axis: |U| runs between roughly 0.2 and 0.45 — far below Figure 1's spikes.
+          Because P &gt; S the denominator P + S·sin(·) has minimum P − S = 1 on the real line,
+          so this branch stays away from zero.
+        </figcaption>
+      </figure>
+
+      <div class="fig-pair">
+        <figure class="fig">
+          <img src="figures/fig-03.png" alt="Two overlaid 3D surfaces in indigo and green">
+          <figcaption>
+            <span class="fig-n">Figure 3</span>
+            Wave profile variation of U<sub>τ</sub> for θ = 10° (indigo) and θ = 30° (green).
+            Two oblique angles overlaid on the same axes; the green surface reaches higher.
+          </figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="figures/fig-04.png" alt="Two overlaid 3D periodic surfaces in blue and red">
+          <figcaption>
+            <span class="fig-n">Figure 4</span>
+            Wave profile variation of U<sub>υ</sub> for θ = 50° (blue) and θ = 60° (green).
+            The periodic branch under two oblique angles.
+          </figcaption>
+        </figure>
+      </div>
+
+      <h2 id="oblique">Figures 5–6 · Obliqueness, in 2D where it can actually be read</h2>
+      <p>
+        The 3D surfaces look impressive; the 2D cuts are what carry the argument. These two are
+        the figures to point at if asked "what did you actually find?"
+      </p>
+
+      <figure class="fig">
+        <img src="figures/fig-05.png" alt="Line plot of |U_tau| against x for three oblique angles, each a flat plateau with a sharp local feature">
+        <figcaption>
+          <span class="fig-n">Figure 5</span>
+          Obliqueness of U<sub>τ</sub> for P = 3, S = 2, R = 3, χ = −5, β = 0.8;
+          θ = 10° (indigo), 30° (green), 50° (red).
+          <strong>Read it off the plot:</strong> the plateau sits at |U| ≈ 2.28, 1.96 and 1.51
+          respectively. <strong>Increasing θ lowers the amplitude.</strong> The sharp
+          spike-and-dip also migrates leftward and broadens as θ grows.
+        </figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="figures/fig-06.png" alt="Line plot of |U_upsilon| against x for three oblique angles, showing periodic peaks of decreasing height">
+        <figcaption>
+          <span class="fig-n">Figure 6</span>
+          Obliqueness of U<sub>υ</sub> for P = 3, S = 2, R = 3, χ = 5, β = 0.8;
+          θ = 10° (red), 20° (blue), 30° (green).
+          Peak heights fall from ≈ 1.85 to ≈ 1.17 to ≈ 0.65 as θ increases, while the peaks
+          themselves broaden. This is the clearest single piece of evidence in the report:
+          <strong>obliqueness trades amplitude for width.</strong>
+        </figcaption>
+      </figure>
+
+      <div class="say">
+        <p class="say-label">Say this about obliqueness</p>
+        <p>
+          "As the oblique angle increases the wave broadens and its amplitude drops. You can
+          see it directly in Figure 6 — the peak falls from about 1.85 at ten degrees to 0.65
+          at thirty. It comes out of the transformation: θ enters only through l = cos θ and
+          m = sin θ, and those feed the constant B₁, which is the overall amplitude, and ω,
+          which sets the scale of ξ."
+        </p>
+      </div>
+
+      <h2 id="beta">Figures 7–9 · The fractional order</h2>
+
+      <div class="fig-pair">
+        <figure class="fig">
+          <img src="figures/fig-07.png" alt="3D surfaces for two beta values with very tall spikes reaching 90">
+          <figcaption>
+            <span class="fig-n">Figure 7</span>
+            Beta variation of U<sub>τ</sub> for θ = 10°, χ = −5;
+            β = 0.6 (indigo), β = 0.7 (green).
+            The vertical axis runs to <strong>90</strong>, against a plateau of 2.27 — the
+            clearest illustration of how violent the complex-ξ region gets. How large the
+            maximum is depends on how close the sample grid lands to a complex pole, so the
+            number itself is not reproducible; the plateau is.
+          </figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="figures/fig-08.png" alt="3D periodic surfaces for two beta values in red and blue">
+          <figcaption>
+            <span class="fig-n">Figure 8</span>
+            Beta variation of U<sub>υ</sub> for θ = 50°, χ = 5;
+            β = 0.6 (red), β = 0.7 (blue).
+            The two β values produce the same amplitude envelope but different spacing.
+          </figcaption>
+        </figure>
+      </div>
+
+      <figure class="fig">
+        <img src="figures/fig-09.png" alt="Three overlaid periodic curves for beta 0.6, 0.7 and 0.8, identical in height but progressively stretched">
+        <figcaption>
+          <span class="fig-n">Figure 9</span>
+          Beta variation of U<sub>υ</sub> for θ = 50°, P = 3, S = 2, R = 3, χ = 5;
+          β = 0.6, 0.7, 0.8.
+          <strong>The single most informative figure in the report.</strong> All three curves
+          peak at the same height — about 1.47 — but their spacing differs, and they progressively
+          dephase across the window. The amplitude is untouched by β; only the horizontal scale
+          moves.
+        </figcaption>
+      </figure>
+
+      <div class="note good">
+        <p class="note-title">Why β does exactly this, and nothing else</p>
+        <p>
+          Because β lives <em>only</em> inside ξ. Look at Eq. (12): β appears in the definition
+          of the travelling coordinate and nowhere else — it never reaches B₁, which sets the
+          amplitude. So changing β can only rescale the horizontal axis; it is mathematically
+          incapable of changing the peak height. Figure 9 is that fact made visible. If you say
+          this in an interview you have demonstrated that you understand the structure of your
+          own solution rather than just describing a picture.
+        </p>
+      </div>
+      <p class="footnote">
+        The report words it as "increasing the beta parameter fractionally results in a decrease
+        in wave width while the amplitude remains constant … decreasing wave width ultimately
+        leads to the increase of frequency". The amplitude half is exactly right and is the
+        important half.
+      </p>
+
+      <h2 id="time">Figures 10–11 · Time</h2>
+
+      <div class="fig-pair">
+        <figure class="fig">
+          <img src="figures/fig-10.png" alt="Three curves at t=3,4,5 showing a feature that grows into a tall narrow peak">
+          <figcaption>
+            <span class="fig-n">Figure 10</span>
+            Time variation of U<sub>τ</sub> for θ = 60°, β = 0.8; t = 3, 4, 5.
+            The plateau sits at |U| ≈ 1.44 and stays there. What moves is the local feature near
+            x ≈ −13: at t = 3 it is a dip, by t = 5 it has become a spike reaching 3.2. The
+            structure is travelling through the window, and at t = 5 the pole is nearly on top
+            of the sampled line.
+          </figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="figures/fig-11.png" alt="Three periodic curves at t=4,8,12, identical in shape but shifted horizontally">
+          <figcaption>
+            <span class="fig-n">Figure 11</span>
+            Time variation of U<sub>υ</sub> for θ = 60°, β = 0.8; t = 4, 8, 12.
+            |U| runs between 0.10 and 0.49 at every time. The three curves are the same curve,
+            translated — which is exactly what "travelling wave" means, and this figure is the
+            cleanest demonstration of it in the report.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="note good">
+        <p class="note-title">Independently reproduced — and where reproduction stops</p>
+        <p>
+          Implementing Eqs. (19) and (20) directly in Python reproduces every
+          <strong>amplitude</strong> in the report:
+        </p>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Quantity</th><th>Computed</th><th>Report</th></tr></thead>
+            <tbody>
+              <tr><td>Fig. 5 / 10 plateau |B₁|√5 at θ = 10°, 30°, 50°, 60°</td><td class="num-col">2.267, 1.948, 1.500, 1.415</td><td class="num-col">2.28, 1.96, 1.51, ≈1.44</td></tr>
+              <tr><td>Fig. 6 peak |U| at θ = 10°, 20°, 30°</td><td class="num-col">1.861, 1.175, 0.649</td><td class="num-col">≈1.85, 1.17, 0.65</td></tr>
+              <tr><td>Fig. 11 |U| range, θ = 60°, β = 0.8</td><td class="num-col">0.0987 – 0.4937</td><td class="num-col">axis 0.10 – 0.49</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Every one of those is independent of ω, so together they confirm <strong>B₁ and the
+          structure of the solutions</strong>. What cannot be reproduced is the <em>position</em>
+          of features along x — that depends on ω, on the value of y, and on whether the
+          transformation used Γ(β) or √β, and the report pins down none of the three. That is a
+          reproducibility gap in the report rather than a failure of the formulas, and it is a
+          fair thing to say so.
+        </p>
+        <p>
+          You can run all of this live on <a href="lab.html">page 11</a>.
+        </p>
+      </div>
+
+      <h2 id="summary">The parameter story, in one table</h2>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Parameter</th><th>Enters through</th><th>Effect on the wave</th><th>Evidence</th></tr></thead>
+          <tbody>
+            <tr><td><strong>θ</strong> (obliqueness)</td><td>l = cos θ, m = sin θ → B₁ and ω</td><td>Amplitude falls, width grows</td><td>Figs. 3–6</td></tr>
+            <tr><td><strong>β</strong> (fractional order)</td><td>ξ only, via Eq. (12)</td><td>Rescales horizontally; amplitude unchanged</td><td>Figs. 7–9</td></tr>
+            <tr><td><strong>χ</strong> (auxiliary)</td><td>Selects Eq. (10) or (11)</td><td>χ &lt; 0 → hyperbolic kink, bounded by |B₁|√−χ; χ &gt; 0 → bounded periodic</td><td>Fig. 1 vs Fig. 2</td></tr>
+            <tr><td><strong>t</strong> (time)</td><td>ξ, with speed ω</td><td>Rigid translation of the profile</td><td>Figs. 10–11</td></tr>
+            <tr><td><strong>P, S</strong></td><td>Eqs. (10)–(11) denominators</td><td>Set the shape; on the χ &gt; 0 branch S &gt; P would create real poles</td><td>Held fixed throughout</td></tr>
+            <tr><td><strong>R</strong></td><td>ξ + R</td><td>Pure shift along ξ</td><td>Held fixed at 3</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="gaps">What the figures do not say</h2>
+      <div class="note warn">
+        <p class="note-title">Know these before you are asked</p>
+        <ul>
+          <li>
+            <strong>The value of y is never stated.</strong> Every figure is drawn over x and t,
+            so y must have been fixed at some value — the report does not say which. In an
+            interview: "y is held constant in all the plots; the report does not record the
+            value, and it should."
+          </li>
+          <li>
+            <strong>P and S are never varied.</strong> They are fixed at 3 and 2 in all eleven
+            figures, yet they are what decides whether the χ &lt; 0 branch has poles. With
+            S &gt; P the picture would change qualitatively. That is the most interesting
+            experiment the report did not run — and a genuinely good answer to "what would you
+            do differently?"
+          </li>
+          <li>
+            <strong>No verification figure.</strong> Nothing checks that (19) and (20) actually
+            satisfy Eq. (1) — no residual plot, no substitution check. That is straightforward to
+            fix, and page 11 does it symbolically with SymPy.
+          </li>
+          <li>
+            <strong>Nothing about stability.</strong> The figures show that solutions exist and
+            what they look like. They say nothing about whether a small perturbation would grow.
+          </li>
+        </ul>
+      </div>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

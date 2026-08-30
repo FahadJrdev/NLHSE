@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Unified Technique — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="method">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">The Unified Technique</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">04 · The mathematics</p>
+      <h1>The Unified Technique</h1>
+      <p class="lede">
+        Four steps, and every one of them is a decision you should be able to defend.
+        This is Chapter 2 of your report, stated generally, before it meets your equation.
+      </p>
+
+      <nav class="jump">
+        <a href="#s1">Step 1 — transform</a>
+        <a href="#s2">Step 2 — the ansatz</a>
+        <a href="#balance">Homogeneous balancing</a>
+        <a href="#s3">Step 3 — match</a>
+        <a href="#s4">Step 4 — solve</a>
+        <a href="#family">Where it sits</a>
+      </nav>
+
+      <p>
+        The method applies to any nonlinear PDE written as
+        ℱ(U, U<sub>x</sub>, U<sub>y</sub>, U<sub>t</sub>, U<sub>xx</sub>, U<sub>yy</sub>,
+        U<sub>tt</sub>, …) = 0 with U = U(x, y, t), Eq. (5) in the report.
+      </p>
+
+      <ol class="steps">
+        <li id="s1">
+          <h4>Reduce the PDE to an ODE</h4>
+          <p>Assume the solution depends on the three variables only through one combination:</p>
+          <div class="eq">
+            <div>U(x, y, t) = e<sup>iφ</sup> u(ξ)
+ξ = lx + my − ωt
+φ = −lx − my + ct</div>
+            <span class="num">(6)</span>
+          </div>
+          <p>
+            ξ is the <strong>travelling coordinate</strong> — the profile is constant along
+            it. φ is the <strong>phase</strong>, carrying the oscillation. Note that they use the
+            same l and m with opposite signs, and different speeds: ω for the envelope,
+            c for the phase. That separation of group and phase velocity is standard for
+            envelope equations, and it is what allows the imaginary part of the reduced
+            equation to fix c independently.
+          </p>
+          <p>The result is an ODE in one variable, Eq. (7):</p>
+          <div class="eq"><div>𝒯(u, u′, u″, u‴, …) = 0</div><span class="num">(7)</span></div>
+        </li>
+
+        <li id="s2">
+          <h4>Expand the solution in an auxiliary function</h4>
+          <p>Assume u(ξ) is a finite Laurent-type series in a function δ(ξ):</p>
+          <div class="eq">
+            <div>u(ξ) = A₀ + Σ<sup>N</sup><sub>i=1</sub> ( A<sub>i</sub> δ<sup>−i</sup>(ξ) + B<sub>i</sub> δ<sup>i</sup>(ξ) )</div>
+            <span class="num">(8)</span>
+          </div>
+          <p>
+            The <em>unified</em> in "Unified Technique" is this: both positive and negative
+            powers of δ appear. Methods that keep only positive powers (tanh-method,
+            (G′/G)-expansion) are special cases with all A<sub>i</sub> = 0. Including the
+            negative powers is what lets one ansatz produce several known families at once.
+          </p>
+          <p>δ is not arbitrary — it satisfies a Riccati-type first-order ODE:</p>
+          <div class="eq eq-2"><div>δ′ = δ(ξ)² + χ</div><span class="num">(9)</span></div>
+          <p>
+            This is the engine of the method. Because δ′ is expressible in δ, <em>every</em>
+            derivative of the series (8) is again a polynomial in δ. No new functions ever
+            appear, however many times you differentiate — which is what makes coefficient
+            matching possible at all.
+          </p>
+          <p>Eq. (9) is solved in closed form, and the sign of χ decides which family you get:</p>
+          <div class="eq">
+            <div>χ &lt; 0:  δ(ξ) = [ √(χ(−(P²+S²))) − S√−χ · cosh(2√−χ (ξ+R)) ] / [ P + S·sinh(2√−χ (ξ+R)) ]</div>
+            <span class="num">(10)</span>
+          </div>
+          <div class="eq eq-2">
+            <div>χ &gt; 0:  δ(ξ) = [ √(χ(S²−P²)) − S√χ · cos(2√χ (ξ+R)) ] / [ P + S·sin(2√χ (ξ+R)) ]</div>
+            <span class="num">(11)</span>
+          </div>
+          <p>
+            P, S and R are free constants of integration. R shifts the wave along ξ; P and S
+            set its shape and, critically, whether the denominator can vanish.
+          </p>
+        </li>
+
+        <li id="balance">
+          <h4>Fix N by homogeneous balancing</h4>
+          <p>
+            N is not chosen by taste. Balance the highest-order derivative against the highest
+            nonlinear term, counting powers of δ.
+          </p>
+          <p>
+            In your equation the competition is u″ against u³. If u ~ δ<sup>N</sup>, then since
+            δ′ ~ δ² each differentiation raises the power by one: u′ ~ δ<sup>N+1</sup> and
+            u″ ~ δ<sup>N+2</sup>. Meanwhile u³ ~ δ<sup>3N</sup>. Setting them equal:
+          </p>
+          <div class="eq"><div>N + 2 = 3N   ⟹   N = 1</div></div>
+          <p>
+            That is a complete, self-contained derivation you can do on a whiteboard in
+            fifteen seconds. Learn it — it is one of the most commonly asked questions on this
+            family of methods, and being able to <em>derive</em> N rather than assert it is a
+            visible difference in level.
+          </p>
+        </li>
+
+        <li id="s3">
+          <h4>Substitute and match coefficients</h4>
+          <p>
+            Put (8) and its derivatives, together with (9), into (7). Everything collapses to a
+            single polynomial in δ(ξ). A polynomial vanishes identically only if every
+            coefficient vanishes, so set the coefficient of each power δ<sup>i</sup> to zero.
+            The result is a system of nonlinear algebraic equations in
+            A<sub>i</sub>, B<sub>i</sub>, ω and the equation's own parameters.
+          </p>
+          <p>
+            The step converts a differential problem into an algebraic one. That is the trade
+            the whole method exists to make.
+          </p>
+        </li>
+
+        <li id="s4">
+          <h4>Solve the algebraic system</h4>
+          <p>
+            Solve with a computer algebra system — your report used <strong>Maple</strong>.
+            Substituting the resulting constants back into (8), with δ given by (10) or (11),
+            produces the travelling-wave solutions.
+          </p>
+          <div class="note warn">
+            <p class="note-title">Expect to be asked about the CAS</p>
+            <p>
+              "Maple solved it" is a weak answer on its own. Be ready to say what the system
+              looked like — five coupled polynomial equations in A₀, A₁, B₁ and ω — and how you
+              handled the branches, since a nonlinear system has multiple roots and you reported
+              one. See <a href="derivation.html">page 05</a>, where the system is written out
+              and the branch you took is identified.
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <h2 id="family">Where this method sits</h2>
+      <p>
+        The Unified Technique belongs to a large family of <strong>ansatz-based exact-solution
+        methods</strong>: the tanh and extended tanh methods, (G′/G)-expansion, the Kudryashov
+        method, sine–cosine, the exp-function method, Jacobi elliptic function expansion.
+        They share one architecture — assume a series in an auxiliary function with a known
+        simple ODE, balance, match, solve.
+      </p>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Strength</th><th>Limitation</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Exact closed-form solutions, with no discretisation error at all</td>
+              <td>Only finds solutions of the assumed form; says nothing about the general solution</td>
+            </tr>
+            <tr>
+              <td>Fast, and mechanisable in a CAS</td>
+              <td>No existence, uniqueness or stability information</td>
+            </tr>
+            <tr>
+              <td>Gives exact benchmarks against which a numerical scheme can be validated</td>
+              <td>Cannot handle arbitrary initial or boundary conditions — the ansatz fixes them</td>
+            </tr>
+            <tr>
+              <td>Reveals parameter dependence analytically, not just sample by sample</td>
+              <td>Nothing about what happens when the wave is perturbed, or how two of them interact</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="say">
+        <p class="say-label">Say this if asked about limitations</p>
+        <p>
+          "The method finds solutions of an assumed shape — it doesn't characterise the
+          solution set, and it gives no stability information. What it does give is exact
+          solutions, and those are genuinely useful as benchmarks: if you're validating a
+          finite-difference or spectral solver for this equation, my Eq. (19) and (20) are
+          exact initial data with a known exact answer at every later step, which is the
+          cleanest possible convergence test."
+        </p>
+      </div>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

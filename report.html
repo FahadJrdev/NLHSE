@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The report, chapter by chapter — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="report">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">The report</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">01 · Orientation</p>
+      <h1>The report, chapter by chapter</h1>
+      <p class="lede">
+        Twenty-four pages, five chapters. If an examiner says "walk me through your report",
+        this is the shape of the answer — roughly ninety seconds spoken, and you should be
+        able to give it without notes.
+      </p>
+
+      <nav class="jump">
+        <a href="#map">The map</a>
+        <a href="#ch1">Ch. 1 — Introduction</a>
+        <a href="#ch2">Ch. 2 — Methodology</a>
+        <a href="#ch3">Ch. 3 — Solutions</a>
+        <a href="#ch4">Ch. 4 — Figures</a>
+        <a href="#ch5">Ch. 5 — Conclusions</a>
+        <a href="#spoken">The spoken version</a>
+      </nav>
+
+      <h2 id="map">The map</h2>
+      <div class="tw">
+        <table>
+          <thead>
+            <tr><th>Pages</th><th>Chapter</th><th>What it does</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num-col">1–3</td><td>1. Introduction</td><td>Defines NLEEs, states the governing equation (1), defines the beta fractional derivative (3), recasts the equation as (4), reviews the literature</td></tr>
+            <tr><td class="num-col">4–6</td><td>2. Methodology</td><td>The Unified Technique as a general recipe — four steps, Eqs. (5)–(11)</td></tr>
+            <tr><td class="num-col">6–8</td><td>3. Solutions</td><td>Applies the recipe: transformation (12), converted ODE (13), real/imaginary split (14)–(16), balancing, algebraic system (18), constants, final solutions (19)–(20)</td></tr>
+            <tr><td class="num-col">9–14</td><td>4. Graphical representations</td><td>Eleven Maple figures and the discussion of what each parameter does</td></tr>
+            <tr><td class="num-col">15</td><td>5. Conclusions</td><td>What was achieved, and what future work would look like</td></tr>
+            <tr><td class="num-col">16–17</td><td>Bibliography</td><td>25 references</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="ch1">Chapter 1 — Introduction</h2>
+      <p>
+        Opens wide: a PDE involves partial derivatives in several variables; a nonlinear
+        evolution equation (NLEE) is a nonlinear PDE with time among its variables, written
+        generally as ℱ(u, u<sub>t</sub>, u<sub>xx</sub>, u<sub>xxx</sub>, …, x, t) = 0. These
+        describe fibre-optic wave dynamics, quantum mechanics, plasma physics,
+        superconductivity and electromagnetic propagation.
+      </p>
+      <p>
+        It then narrows to the object of study — <strong>§1.2, the governing equation</strong>:
+      </p>
+
+      <div class="eq">
+        <div>iU<sub>y</sub> + ½ (U<sub>xx</sub> − U<sub>tt</sub>) + |U|²U = 0,    i = √−1</div>
+        <span class="num">(1)</span>
+      </div>
+      <p class="eq-note">
+        U(x, y, t) is the wave envelope over two spatial variables and time. The report
+        motivates it as a model for optical signal propagation in single-mode fibre.
+      </p>
+
+      <p>
+        <strong>§1.3</strong> introduces the beta fractional derivative of Atangana et al., its
+        formal limit definition (3) and five algebraic properties, then substitutes it into (1)
+        to give the fractional form the project actually solves:
+      </p>
+
+      <div class="eq">
+        <div>i ᴬ₀𝔇<sup>β</sup><sub>y</sub>U + ½ ( ᴬ₀𝔇<sup>β</sup><sub>xx</sub>U − ᴬ₀𝔇<sup>β</sup><sub>tt</sub>U ) + |U|²U = 0</div>
+        <span class="num">(4)</span>
+      </div>
+
+      <p>
+        <strong>§1.4</strong> is the literature review: where NLSEs appear, and the precedent for
+        the Unified Technique — specifically its use on the conformable time-fractional
+        Schrödinger equation with perturbation terms.
+      </p>
+
+      <h2 id="ch2">Chapter 2 — Methodology</h2>
+      <p>
+        This chapter is deliberately generic: it states the Unified Technique for
+        <em>any</em> nonlinear PDE, so that Chapter 3 can simply apply it. Four steps —
+        travelling-wave transformation, series ansatz, coefficient matching, solve. It is
+        covered in full on <a href="method.html">page 04</a>.
+      </p>
+      <div class="note warn">
+        <p class="note-title">Watch this seam</p>
+        <p>
+          Chapter 2 presents the method as a general tool and cites reference [25] for it.
+          Be ready to say clearly which parts of the report are <strong>the method</strong>
+          (existing, borrowed, correctly attributed) and which are <strong>your
+          contribution</strong> (applying it to this equation, under a beta derivative,
+          and analysing the parameter dependence). Claiming the method itself would be an
+          unforced error.
+        </p>
+      </div>
+
+      <h2 id="ch3">Chapter 3 — Solutions</h2>
+      <p>
+        The working chapter. The fractional travelling-wave transformation (12) converts the
+        PDE into the ODE (13); the ODE separates into a real part (14) and an imaginary part
+        (15); the imaginary part is solved immediately for the speed c (16); homogeneous
+        balancing gives N = 1; the trial solution (17) is substituted; matching powers of
+        δ(ξ) gives the algebraic system (18); Maple solves it for ω, A₀, A₁, B₁; and
+        substituting back gives the two final solution families (19) and (20).
+      </p>
+      <p>Reproduced step by step on <a href="derivation.html">page 05</a>.</p>
+
+      <h2 id="ch4">Chapter 4 — Graphical representations</h2>
+      <p>
+        Eleven figures, all Maple. Figs. 1–2 are the base 3D profiles of each branch;
+        3–4 vary the oblique angle θ in 3D; 5–6 show obliqueness in 2D; 7–8 vary the
+        fractional order β in 3D; 9 varies β in 2D; 10–11 vary time. Read the parameter
+        story on <a href="results.html">page 06</a>.
+      </p>
+
+      <h2 id="ch5">Chapter 5 — Conclusions</h2>
+      <p>
+        States that the Unified Technique proved effective for deriving soliton solutions,
+        that the solutions illuminate wave behaviour under obliqueness, time and β variation,
+        and that applications lie in mathematical physics, optical wave structures and wave
+        transmission. It names three directions for future work: more generalised nonlinear
+        equations, additional physical parameters, and — this is the sentence to remember —
+        <strong>"employing numerical methods to verify the analytical results"</strong>.
+      </p>
+      <div class="note good">
+        <p class="note-title">Use your own conclusion as the bridge</p>
+        <p>
+          Your report already names numerical verification as the next step. That is the
+          most useful sentence in the document for an interview: the move from analytical
+          to numerical is not a change of direction being invented on the spot to please a
+          panel — it is the continuation your own report proposed.
+        </p>
+      </div>
+
+      <h2 id="spoken">The spoken version</h2>
+      <div class="say">
+        <p class="say-label">Say this — the ninety-second walkthrough</p>
+        <p>
+          "The report has five chapters. Chapter 1 sets up the governing equation — the
+          (2+1)-dimensional nonlinear hyperbolic Schrödinger equation, which models optical
+          signal propagation in single-mode fibre — and introduces the beta fractional
+          derivative, which generalises the integer-order derivatives with a parameter β
+          between 0 and 1."
+        </p>
+        <p>
+          "Chapter 2 states the Unified Technique in general form: you assume a
+          travelling-wave transformation, expand the solution as a finite series in an
+          auxiliary function δ that satisfies a simple Riccati-type ODE, substitute, and
+          match coefficients."
+        </p>
+        <p>
+          "Chapter 3 applies it. The transformation reduces the PDE to a single ODE in ξ.
+          Separating real and imaginary parts gives the wave speed straight away. Balancing
+          the cubic term against the second derivative gives N = 1, so the trial solution has
+          three unknown constants. Matching powers of δ gives a nonlinear algebraic system,
+          which I solved in Maple. Two solution families come out — hyperbolic when the
+          auxiliary parameter χ is negative, trigonometric when it is positive."
+        </p>
+        <p>
+          "Chapter 4 plots them and studies the parameters: as the oblique angle increases the
+          wave broadens and its amplitude falls; increasing β narrows the wave and raises its
+          frequency while the amplitude holds. Chapter 5 concludes, and identifies numerical
+          verification of the analytical results as the natural next step."
+        </p>
+      </div>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

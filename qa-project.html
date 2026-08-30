@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q&amp;A — your project — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="qa-project">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">Q&amp;A — your project</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">07 · The interview</p>
+      <h1>Q&amp;A — your project</h1>
+      <p class="lede">
+        Every answer opens with a <strong>bold one-sentence version</strong>. That is what you
+        say. The paragraphs beneath are for when they push. Turn on <strong>Quiz mode</strong>
+        and answer aloud before revealing — reading an answer and producing one are different
+        skills, and only the second is being tested.
+      </p>
+
+      <div class="qa-toolbar">
+        <input class="search" data-search type="search" placeholder="Filter questions…" aria-label="Filter questions">
+        <button class="btn" type="button" data-quiz>Quiz mode</button>
+        <button class="btn" type="button" data-reveal-all>Reveal all</button>
+        <span class="counter" data-counter></span>
+      </div>
+
+      <h2 data-qa-sec>Opening questions</h2>
+
+      <article class="qa" id="p01">
+        <div class="qa-head"><span class="qa-id">P01</span>
+          <h3 class="qa-q">Tell me about your master's project.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">I derived exact travelling-wave solutions of the (2+1)-dimensional nonlinear hyperbolic Schrödinger equation under a beta fractional derivative, using the Unified Technique, and studied how obliqueness and the fractional order reshape them.</p>
+          <p>
+            Then stop and let them steer. If they want more: the equation models optical signal
+            propagation in single-mode fibre. The method turns the PDE into an ODE through a
+            travelling-wave ansatz, expands the solution as a short series in an auxiliary
+            function satisfying δ′ = δ² + χ, and matches coefficients to get an algebraic
+            system. Two closed-form families come out — hyperbolic for χ &lt; 0 and
+            trigonometric for χ &gt; 0.
+          </p>
+          <p>
+            Do not recite the whole report unprompted. Two sentences, then a pause, is a
+            stronger opening than ninety seconds of monologue.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">opening</span><span class="tag">summary</span></div>
+      </article>
+
+      <article class="qa" id="p02">
+        <div class="qa-head"><span class="qa-id">P02</span>
+          <h3 class="qa-q">Why is it called <em>hyperbolic</em>?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Because the two second derivatives enter with opposite signs — U<sub>xx</sub> − U<sub>tt</sub> — which makes the linear operator the wave operator, hyperbolic in the standard classification, rather than the Laplacian, which is elliptic.</p>
+          <p>
+            In the ordinary (2+1)-dimensional NLS you would have U<sub>xx</sub> + U<sub>yy</sub>.
+            The sign flip is not cosmetic: it corresponds to anomalous dispersion in one
+            coordinate, and it is what makes oblique propagation a meaningful parameter to
+            study — which is why θ appears throughout my Chapter 4.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">definitions</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="p03">
+        <div class="qa-head"><span class="qa-id">P03</span>
+          <h3 class="qa-q">Walk me through the derivation.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Transformation, split, balance, match, solve — five moves.</p>
+          <ol>
+            <li>Assume U = e<sup>iφ</sup>u(ξ) with ξ a beta-deformed combination of x, y and t. This reduces the PDE to a single ODE.</li>
+            <li>u is real, so the real and imaginary parts of the ODE must vanish separately. The imaginary part is linear and gives the speed immediately: c = (l² − m)/ω.</li>
+            <li>Balance u″ against u³: since δ′ = δ², each derivative raises the power by one, so N + 2 = 3N and N = 1.</li>
+            <li>Substitute u = A₀ + A₁/δ + B₁δ and match powers of δ. A₀ = 0 falls straight out of the 3A₀B₁² = 0 equation.</li>
+            <li>Solve the remaining system for ω and B₁, and substitute the two branches of δ — cosh/sinh for χ &lt; 0, cos/sin for χ &gt; 0.</li>
+          </ol>
+          <p>Ask for a whiteboard. This answer is much stronger written than spoken.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">derivation</span><span class="tag">core</span></div>
+      </article>
+
+      <h2 data-qa-sec>The method</h2>
+
+      <article class="qa" id="p04">
+        <div class="qa-head"><span class="qa-id">P04</span>
+          <h3 class="qa-q">Why N = 1? Where does that come from?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Homogeneous balancing: if u ~ δ<sup>N</sup> then u″ ~ δ<sup>N+2</sup> because δ′ = δ² + χ raises the power by one per derivative, while u³ ~ δ<sup>3N</sup>. Setting N + 2 = 3N gives N = 1.</p>
+          <p>
+            The important part is <em>why</em> differentiating raises the power. Because δ′ is
+            itself quadratic in δ, differentiating δ<sup>N</sup> gives Nδ<sup>N−1</sup>δ′ =
+            Nδ<sup>N−1</sup>(δ² + χ), whose leading term is δ<sup>N+1</sup>. Do it twice and
+            you are at δ<sup>N+2</sup>.
+          </p>
+          <p>Derive it on the board rather than asserting it. It takes fifteen seconds and it is visibly different from having memorised a rule.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">method</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="p05">
+        <div class="qa-head"><span class="qa-id">P05</span>
+          <h3 class="qa-q">What makes the Unified Technique "unified"?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">The ansatz carries both positive and negative powers of the auxiliary function, so one expansion reproduces several established methods as special cases.</p>
+          <p>
+            Keep only positive powers and you have essentially the tanh or (G′/G) method.
+            Including A<sub>i</sub>δ<sup>−i</sup> alongside B<sub>i</sub>δ<sup>i</sup> lets a
+            single calculation generate solutions those methods would need separate runs to find.
+          </p>
+          <p>
+            Be honest about how it turned out here: <strong>A₁ came out zero</strong>, so for
+            this equation the negative-power half contributed nothing and the result sits in the
+            positive-power branch. The general ansatz was used; the equation collapsed it. Saying
+            that is better than letting them find it.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">method</span><span class="tag">honesty</span></div>
+      </article>
+
+      <article class="qa" id="p06">
+        <div class="qa-head"><span class="qa-id">P06</span>
+          <h3 class="qa-q">What is δ, and why that particular ODE?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">δ is an auxiliary function satisfying δ′ = δ² + χ — a Riccati equation — chosen because it is solvable in closed form and because it keeps every derivative of the ansatz polynomial in δ.</p>
+          <p>
+            That closure property is the whole point. Differentiate the series any number of
+            times and no new functions appear; everything stays a polynomial in δ. That is what
+            makes "collect coefficients and set them to zero" a finite, well-defined operation.
+          </p>
+          <p>
+            The sign of χ picks the branch of the Riccati solution: negative gives
+            hyperbolic functions, positive gives trigonometric ones. That single sign is what
+            produces two qualitatively different solution families from one calculation.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">method</span><span class="tag">riccati</span></div>
+      </article>
+
+      <article class="qa" id="p07">
+        <div class="qa-head"><span class="qa-id">P07</span>
+          <h3 class="qa-q">You used Maple. What did it actually do?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">It solved the nonlinear algebraic system that comes out of coefficient matching, and it produced the figures. The setting up of the system and the choice of which root to keep were mine.</p>
+          <p>
+            Be able to describe the system: with A₀ = A₁ = 0 it reduces to two conditions —
+            B₁(l² − ω²) + B₁³ = 0, which gives B₁² = ω² − l², and χ(l² − ω²) + ζ = 0. Those two
+            in the unknowns ω and B₁, with ζ depending on ω, give a quadratic in ω² and hence
+            multiple roots.
+          </p>
+          <p>
+            "Maple solved it" alone is a weak answer. "Maple solved a system I can write down,
+            and here are the two conditions" is a strong one.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">tools</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <h2 data-qa-sec>The fractional derivative</h2>
+
+      <article class="qa" id="p08">
+        <div class="qa-head"><span class="qa-id">P08</span>
+          <h3 class="qa-q">Why a fractional derivative? What does β buy you?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">It generalises the model — β = 1 recovers the classical equation — and gives one extra parameter that deforms the wave's spatial scale without touching its amplitude.</p>
+          <p>
+            The physical motivation usually given is memory or non-local response in the medium.
+            The mathematical motivation, which I would state plainly, is that the beta derivative
+            admits a chain rule, and that is what makes exact solutions reachable at all.
+          </p>
+          <p>
+            What β actually does is visible in my Figure 9: three values of β give curves with
+            identical peak height and different spacing. That is not a coincidence — β appears
+            only inside ξ, never in B₁, so it is mathematically incapable of changing the
+            amplitude.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">fractional</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="p09">
+        <div class="qa-head"><span class="qa-id">P09</span>
+          <h3 class="qa-q">The beta derivative is local. Isn't that a contradiction in terms for a "fractional" derivative?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">It is a fair criticism, and the honest answer is that the beta derivative is a first derivative multiplied by a position-dependent factor — so my solutions are the classical ones read in a deformed coordinate.</p>
+          <p>
+            Concretely, ᴬ₀𝔇<sup>β</sup><sub>x</sub>f = (x + 1/Γ(β))<sup>1−β</sup> f′(x). That
+            locality is exactly why the chain rule survives, and why my transformation (12) can
+            absorb the fractional order entirely — β does not appear anywhere in the reduced
+            ODE (13).
+          </p>
+          <p>
+            If genuine non-locality mattered — a real memory kernel — the operator to use would
+            be Caputo, and exact solvability would be lost; you would be solving numerically.
+            That is a legitimate trade, and I would not claim the beta derivative settles the
+            physics.
+          </p>
+          <p>Do not get defensive here. Conceding a good criticism accurately is what separates a candidate who understands the work from one who performed it.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">fractional</span><span class="tag">hard</span></div>
+      </article>
+
+      <article class="qa" id="p10">
+        <div class="qa-head"><span class="qa-id">P10</span>
+          <h3 class="qa-q">Why does β disappear from your ODE?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Because the transformation is built precisely to cancel it: applying the beta derivative to (1/β)(x + 1/Γ(β))<sup>β</sup> multiplies (x + …)<sup>1−β</sup> by (x + …)<sup>β−1</sup>, which is 1.</p>
+          <p>
+            So ᴬ₀𝔇<sup>β</sup><sub>x</sub>ξ = l exactly as ∂ξ/∂x = l would be classically. The
+            fractional order is not solved for; it is absorbed into the definition of the
+            travelling coordinate before any solving happens.
+          </p>
+          <p>This is the single best thing you can say about the structure of your own derivation.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">fractional</span><span class="tag">core</span></div>
+      </article>
+
+      <h2 data-qa-sec>The results</h2>
+
+      <article class="qa" id="p11">
+        <div class="qa-head"><span class="qa-id">P11</span>
+          <h3 class="qa-q">What did you actually find? Give me the result, not the method.</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Two exact solution families, and a clear parameter picture: obliqueness trades amplitude for width, while the fractional order rescales the wave horizontally and leaves the amplitude untouched.</p>
+          <p>
+            Quantitatively, from Figure 6: peak |U| falls from about 1.85 at θ = 10° to 1.17 at
+            20° and 0.65 at 30°. From Figure 9: three values of β give identical peak heights
+            with different spacing.
+          </p>
+          <p>
+            Numbers beat adjectives. "The amplitude decreases with obliqueness" is a weaker
+            answer than "it falls from 1.85 to 0.65 between ten and thirty degrees."
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">results</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="p12">
+        <div class="qa-head"><span class="qa-id">P12</span>
+          <h3 class="qa-q">Are these solitons?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">They are exact travelling-wave solutions of soliton type. I would not claim soliton in the strict sense, because I did not test collision behaviour or establish integrability.</p>
+          <p>
+            The strict definition requires that two of them collide and emerge unchanged apart
+            from a phase shift. My work does not test that. "Solitary wave" or "exact
+            travelling-wave solution" is the defensible term.
+          </p>
+          <p>
+            There is a sharper point available. The χ &lt; 0 family is a <strong>kink</strong>
+            on the real line, not a peak: δ → ∓√−χ as ξ → ±∞, so |U| tends to the same plateau
+            |B₁|√−χ on both sides. It is bounded — the apparent pole in its denominator is
+            removable, because the numerator vanishes at the same point by the identity
+            cosh² − sinh² = 1. The spikes in my Figure 1 appear only where ξ turns complex,
+            below x = −1/√β. The χ &gt; 0 family is bounded and periodic.
+          </p>
+          <p>Volunteering this is a strong move. It is precise, it is checkable, and it shows you read your own figures rather than describing them. See <a href="qa-weakspots.html#w07">W07</a> for the full version.</p>
+        </div>
+        <div class="qa-tags"><span class="tag">results</span><span class="tag">hard</span><span class="tag">honesty</span></div>
+      </article>
+
+      <article class="qa" id="p13">
+        <div class="qa-head"><span class="qa-id">P13</span>
+          <h3 class="qa-q">Did you verify that your solutions satisfy the original equation?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Not in the report, and that is a gap. I have since done it: substituting back gives a residual at the level of numerical round-off, and the check also turned up a typesetting error in one of my printed constants.</p>
+          <p>
+            The honest sequence: the report contains no back-substitution check and no residual
+            plot. Going back to it, u = B₁δ satisfies the reduced real ODE to about
+            10<sup>−6</sup> — pure finite-difference error — <em>once ω is corrected</em>. As
+            printed, ω is too large by a factor of √χ, and the residual is order one.
+          </p>
+          <p>
+            See <a href="qa-weakspots.html#omega">page 09</a>. This is the most valuable single
+            thing in your preparation: an error you found yourself, diagnosed exactly, and can
+            demonstrate live in the <a href="lab.html#c2">Python lab</a>.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">verification</span><span class="tag">critical</span></div>
+      </article>
+
+      <article class="qa" id="p14">
+        <div class="qa-head"><span class="qa-id">P14</span>
+          <h3 class="qa-q">Why do the square roots produce imaginary numbers?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Because at these parameter values the radicands genuinely are negative — B₁ ≈ 0.633i at θ = 60°, and √(−5P² + 5S²) = 5i at P = 3, S = 2. U is complex-valued anyway, so this is consistent; the figures plot |U|.</p>
+          <p>
+            It is worth being explicit that this is expected rather than a bug: the governing
+            equation is a Schrödinger equation and U is a complex envelope from the outset. What
+            you should be able to say is that the modulus is what is physically meaningful — the
+            intensity — and that is what every figure shows.
+          </p>
+          <p>
+            The practical consequence, if you are asked how you would compute with these: you
+            must work in complex arithmetic throughout. In NumPy that means
+            <code>np.emath.sqrt</code> rather than <code>np.sqrt</code>, which would return
+            <code>nan</code>.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">results</span><span class="tag">numerics</span></div>
+      </article>
+
+      <article class="qa" id="p15">
+        <div class="qa-head"><span class="qa-id">P15</span>
+          <h3 class="qa-q">What do P, S and R mean physically?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">They are constants of integration from the Riccati equation, not physical parameters. R is a pure translation along ξ; P and S set the shape.</p>
+          <p>
+            The interesting one is the P–S relationship, and it behaves differently on the two
+            branches. For the χ &gt; 0 branch the denominator is P + S·sin(·), whose minimum on
+            the real line is P − S; with P = 3 and S = 2 that is 1, so it never vanishes. Make S
+            larger than P and that family develops genuine real singularities.
+          </p>
+          <p>
+            The χ &lt; 0 branch is different: there the zero of the denominator is always
+            cancelled by a zero of the numerator, for <em>every</em> P and S, so it is bounded on
+            the real line whatever you choose.
+          </p>
+          <p>
+            I held them fixed at 3, 2 and 3 throughout, which in hindsight is the most
+            interesting experiment the report did not run.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">results</span><span class="tag">parameters</span></div>
+      </article>
+
+      <h2 data-qa-sec>Context and judgement</h2>
+
+      <article class="qa" id="p16">
+        <div class="qa-head"><span class="qa-id">P16</span>
+          <h3 class="qa-q">What is this useful for?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Two things: the physical model is optical pulse propagation in fibre, and the exact solutions are benchmarks for validating numerical solvers.</p>
+          <p>
+            The physics: dispersion spreads a pulse, the Kerr nonlinearity focuses it, and when
+            they balance the pulse propagates without distortion. That is the basis of soliton
+            communication.
+          </p>
+          <p>
+            The second use is the one to lead with in a computational group. An exact solution
+            is exact initial data with a known exact answer at every later time — the cleanest
+            possible convergence test for a finite-difference or spectral scheme. Most PDEs have
+            no such benchmark.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">motivation</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="p17">
+        <div class="qa-head"><span class="qa-id">P17</span>
+          <h3 class="qa-q">What was the hardest part?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Keeping the algebra straight through the substitution — the expansion of u″ with δ′ = δ² + χ produces a lot of terms, and a single sign error propagates silently to the end.</p>
+          <p>
+            A more interesting version of the same answer: the hardest part in hindsight was
+            that I had no independent check. The algebra was verified by being careful rather
+            than by being tested. That is exactly the gap I closed afterwards by substituting
+            the solutions back numerically — and it is how I found the ω error.
+          </p>
+          <p>Answering with a real difficulty and what you did about it is far stronger than "time management".</p>
+        </div>
+        <div class="qa-tags"><span class="tag">behavioural</span></div>
+      </article>
+
+      <article class="qa" id="p18">
+        <div class="qa-head"><span class="qa-id">P18</span>
+          <h3 class="qa-q">What would you do differently?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Four things: verify by back-substitution, vary P and S, record the value of y used in the plots, and add a numerical solution of the PDE to compare against.</p>
+          <ul>
+            <li><strong>Verification.</strong> A residual plot belongs in the report. Its absence is what let the ω typo through.</li>
+            <li><strong>P and S.</strong> Fixed at 3 and 2 in all eleven figures, yet they decide whether the solution is bounded. Varying them is the obvious missing experiment.</li>
+            <li><strong>The value of y.</strong> Every figure is drawn over x and t, so y is fixed at some value the report never states.</li>
+            <li><strong>A numerical comparison.</strong> Solve the PDE with a split-step Fourier scheme from my exact solution as initial data, and measure the drift. My own conclusion names this as the next step.</li>
+          </ul>
+        </div>
+        <div class="qa-tags"><span class="tag">reflection</span><span class="tag">high-frequency</span></div>
+      </article>
+
+      <article class="qa" id="p19">
+        <div class="qa-head"><span class="qa-id">P19</span>
+          <h3 class="qa-q">Which part of this is your own contribution?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">The application, not the method. The Unified Technique and the beta derivative are both established and cited; applying them to this equation, carrying the algebra through, and analysing the parameter dependence is mine.</p>
+          <p>
+            Say the boundary plainly and early. Overclaiming a method you cited is an unforced
+            error and it is trivially checkable. Understating your own work is equally unhelpful:
+            the derivation in Chapter 3 is genuinely yours, and so is every figure.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">honesty</span><span class="tag">attribution</span></div>
+      </article>
+
+      <article class="qa" id="p20">
+        <div class="qa-head"><span class="qa-id">P20</span>
+          <h3 class="qa-q">How does this connect to what our group does?</h3>
+          <input class="qa-done" type="checkbox" aria-label="Mark reviewed"></div>
+        <div class="qa-body">
+          <p class="qa-short">Adapt this one to the specific group — but the durable core is: I have worked on nonlinear PDEs analytically, I can produce exact solutions, and exact solutions are what you validate numerical methods against.</p>
+          <p>
+            If the group is numerical: acknowledge the gap in one sentence and then be concrete
+            about the bridge. "My project was analytical rather than numerical. What transfers is
+            the PDE background and the exact solutions themselves, which are useful as benchmarks.
+            I have since implemented my solutions in Python and reproduced my own figures, and I
+            would want the next step to be a split-step or finite-difference solver compared
+            against them."
+          </p>
+          <p>
+            Do not pretend the project was computational. Do not apologise for it either.
+            Name the gap, then show the work you have already done to cross it.
+          </p>
+        </div>
+        <div class="qa-tags"><span class="tag">fit</span><span class="tag">critical</span></div>
+      </article>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

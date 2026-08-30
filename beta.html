@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The beta fractional derivative — NLHSE project defence</title>
+<script>/* applied before first paint so the layout never jumps */
+try{var d=document.documentElement,s=localStorage,t=s.getItem("nlhse.theme");
+if(t==="dark"||t==="light")d.setAttribute("data-theme",t);
+if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}catch(e){}</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="beta">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <button class="btn btn-icon" type="button" data-menu aria-expanded="false" aria-label="Open navigation">☰</button>
+  <span class="topbar-title">Beta fractional derivative</span>
+  <button class="btn" type="button" data-theme-toggle></button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar"></aside>
+
+  <main class="main" id="main">
+    <div class="col">
+
+      <p class="eyebrow">03 · The mathematics</p>
+      <h1>The beta fractional derivative</h1>
+      <p class="lede">
+        This is the part of your project most likely to draw a sceptical question, because
+        the beta derivative is a <em>local</em> operator wearing the name "fractional". Know
+        the criticism before it is put to you.
+      </p>
+
+      <nav class="jump">
+        <a href="#def">The definition</a>
+        <a href="#props">The five properties</a>
+        <a href="#chain">The one that matters</a>
+        <a href="#why">Why use it</a>
+        <a href="#critique">The honest critique</a>
+        <a href="#gamma">The Γ(β) / √β problem</a>
+      </nav>
+
+      <h2 id="def">The definition</h2>
+      <p>Due to Atangana et al., reference [7] in your report:</p>
+      <div class="eq plain">
+        <div>ᴬ₀𝔇<sup>β</sup><sub>x</sub> f(x) = lim<sub>h→0</sub> [ f( x + g( x + 1/Γ(β) )<sup>1−β</sup> ) − f(x) ] / g ;    0 &lt; β ≤ 1</div>
+        <div class="num" style="text-align:right">(3)</div>
+      </div>
+      <p>
+        Compare it with the ordinary derivative, which is the same limit with the increment
+        being simply <em>g</em>. The beta derivative replaces that plain increment with one
+        <strong>scaled by the point at which you are differentiating</strong>, through the factor
+        (x + 1/Γ(β))<sup>1−β</sup>.
+      </p>
+      <p>
+        Two sanity checks worth having ready. At <strong>β = 1</strong> the exponent 1 − β is zero,
+        the factor becomes 1, and you recover the ordinary derivative exactly. As β decreases
+        toward 0 the increment is stretched more and more strongly with x, so the operator
+        weights distant behaviour differently — that is the "fractional" behaviour it is
+        claiming.
+      </p>
+
+      <h2 id="props">The five properties</h2>
+      <p>Your report lists these; they are worth reciting because they are what make the operator usable:</p>
+      <div class="tw">
+        <table>
+          <thead><tr><th></th><th>Property</th><th>Reads as</th></tr></thead>
+          <tbody>
+            <tr><td>(i)</td><td>𝔇<sup>β</sup>(κ) = 0</td><td>The derivative of a constant is zero</td></tr>
+            <tr><td>(ii)</td><td>𝔇<sup>β</sup>{α₁f + α₂ϱ} = α₁𝔇<sup>β</sup>f + α₂𝔇<sup>β</sup>ϱ</td><td>Linearity</td></tr>
+            <tr><td>(iii)</td><td>𝔇<sup>β</sup>{f·ϱ} = f·𝔇<sup>β</sup>ϱ + ϱ·𝔇<sup>β</sup>f</td><td>The product rule, unchanged</td></tr>
+            <tr><td>(iv)</td><td>𝔇<sup>β</sup>{f/ϱ} = (ϱ·𝔇<sup>β</sup>f − f·𝔇<sup>β</sup>ϱ)/ϱ²</td><td>The quotient rule, unchanged</td></tr>
+            <tr><td>(v)</td><td>if g = (x + 1/Γ(β))<sup>1−β</sup> g̃ …</td><td>The rescaling that produces the chain rule</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="chain">The property that does all the work</h2>
+      <p>
+        Properties (iii) and (iv) are the interesting ones, and the reason is worth
+        understanding rather than memorising: <strong>the Riemann–Liouville and Caputo
+        fractional derivatives do not satisfy a simple product or chain rule.</strong> They are
+        integral operators — genuinely non-local — and a product rule for them is an infinite
+        series.
+      </p>
+      <p>
+        The beta derivative does satisfy them, because it is a local operator: a
+        first derivative multiplied by a position-dependent factor. Concretely,
+      </p>
+      <div class="eq">
+        <div>ᴬ₀𝔇<sup>β</sup><sub>x</sub> f(x) = (x + 1/Γ(β))<sup>1−β</sup> · df/dx</div>
+      </div>
+      <p>
+        And that identity is the entire reason the method works. It means a change of variable
+        exists that converts the fractional PDE into an ordinary one — which is exactly what
+        the transformation (12) does, with its (x + …)<sup>β</sup>/β terms. The fractional
+        order does not survive into the ODE; it is absorbed into the definition of ξ.
+      </p>
+
+      <div class="note info">
+        <p class="note-title">This is the deep point of the whole project</p>
+        <p>
+          The fractional derivative never has to be solved fractionally. It is removed by a
+          substitution before any solving happens. If you can say that sentence and then show
+          where it happens — the exponents on (x + 1/√β)<sup>β</sup> in Eq. (12) — you have
+          demonstrated that you understand your own method rather than having followed a recipe.
+        </p>
+      </div>
+
+      <h2 id="why">Why use a fractional derivative at all</h2>
+      <p>The motivations, in descending order of how well they hold up:</p>
+      <ol>
+        <li>
+          <strong>Generalisation.</strong> β = 1 recovers the classical equation, so the
+          fractional model contains the ordinary one as a special case and gives one extra
+          parameter to fit against data.
+        </li>
+        <li>
+          <strong>Memory and non-locality.</strong> The standard physical argument for fractional
+          models: real media respond to their history, not only to the instantaneous state.
+          Note that this argument is strongest for genuinely non-local operators.
+        </li>
+        <li>
+          <strong>Tractability.</strong> Being honest — the beta derivative is chosen over
+          Caputo or Riemann–Liouville largely because it admits a chain rule and therefore
+          exact solutions. That is a legitimate reason, and stating it plainly is far better
+          than pretending it was purely physical.
+        </li>
+      </ol>
+
+      <h2 id="critique">The honest critique — prepare for this</h2>
+      <div class="note risk">
+        <p class="note-title">The question you may well get</p>
+        <p>
+          <em>"The beta derivative is just a first derivative multiplied by a function of x.
+          It is local. Doesn't that mean your 'fractional' solutions are the ordinary
+          solutions in a stretched coordinate?"</em>
+        </p>
+      </div>
+      <p>
+        This is a real criticism in the literature, and it applies to the conformable
+        derivative family generally. The honest answer is: <em>substantially, yes</em> — and
+        knowing that is a strength, not a concession.
+      </p>
+      <div class="say">
+        <p class="say-label">Say this</p>
+        <p>
+          "That's a fair characterisation, and it's exactly why the method works — the beta
+          derivative satisfies a chain rule, so the fractional PDE maps onto an ordinary one
+          under the substitution in my Eq. (12). The solutions are the classical ones read in
+          a deformed coordinate. What β buys you is a controlled deformation: in my Figure 9,
+          increasing β narrows the wave and raises its frequency while the amplitude holds
+          constant. Whether that deformation is the right physical model for memory in a
+          fibre is a separate question, and I would not claim the beta derivative settles it —
+          Caputo would be the operator to use if genuine non-locality mattered, at the cost
+          of losing exact solvability."
+        </p>
+      </div>
+
+      <h2 id="gamma">The Γ(β) / √β inconsistency in your own report</h2>
+      <div class="note risk">
+        <p class="note-title">Find this before an examiner does</p>
+        <p>
+          Equation (3) defines the beta derivative using the factor
+          <strong>(x + 1/Γ(β))<sup>1−β</sup></strong> — with the gamma function, which is the
+          standard definition. But the travelling-wave transformation in Equation (12) is
+          written with <strong>(x + 1/√β)<sup>β</sup></strong> — with a square root, not a gamma
+          function. These do not agree.
+        </p>
+      </div>
+      <p>
+        Numerically at β = 0.8 they are not far apart — 1/Γ(0.8) ≈ 0.8935 against 1/√0.8 ≈
+        1.1180 — so the figures would look qualitatively similar either way. But it is an
+        inconsistency in the document, and the standard form in the literature is the gamma
+        one.
+      </p>
+      <div class="say">
+        <p class="say-label">If it is raised</p>
+        <p>
+          "You're right, and I noticed it when I went back through the report. Equation (3) uses
+          the standard Atangana definition with 1/Γ(β); the transformation in Eq. (12) is
+          written with 1/√β. The gamma form is the correct one, and it is what I would use if
+          I were rewriting this. At β = 0.8 the two constants differ by about 25%, which
+          shifts the wave along ξ but does not change the structure of the solutions or any of
+          the qualitative conclusions about θ and β. It is a transcription error, not a
+          derivation error."
+        </p>
+      </div>
+      <p class="footnote">
+        The Python lab on <a href="lab.html">page 11</a> lets you set the convention with a
+        flag and see the difference yourself, so this stops being an abstract worry.
+      </p>
+
+      <nav data-pagenav></nav>
+    </div>
+  </main>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
