@@ -39,9 +39,10 @@ if(s.getItem("nlhse.nav")==="collapsed")d.setAttribute("data-nav","collapsed");}
         <p>
           The first Run downloads Pyodide — CPython compiled to WebAssembly — from a CDN,
           about fifteen seconds on a decent connection. After that everything is instant.
-          <strong>All the cells on this page share one interpreter</strong>, so run them in
-          order: Cell 1 defines the functions the others use. <kbd>Ctrl</kbd>+<kbd>Enter</kbd>
-          runs the cell you are typing in. Requires an internet connection the first time.
+          <strong>All the cells share one interpreter, and Cell 1 defines the functions the
+          rest use — so run Cell 1 first.</strong> After that you can jump to any cell in any
+          order. <kbd>Ctrl</kbd>+<kbd>Enter</kbd> runs the cell you are typing in. Needs an
+          internet connection the first time only.
         </p>
       </div>
 
@@ -252,7 +253,9 @@ print("\nreport shows roughly 1.85, 1.17, 0.65")</textarea>
           <button class="btn" type="button" data-reset>Reset</button>
           <button class="btn btn-run" type="button">▶ Run</button>
         </div>
-        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 4">x = np.linspace(0, 15, 4000)
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 4">import matplotlib.pyplot as plt
+
+x = np.linspace(0, 15, 4000)
 fig, ax = plt.subplots()
 
 for b in (0.6, 0.7, 0.8):
@@ -283,7 +286,9 @@ print("\nIdentical peaks => beta cannot touch the amplitude. It lives only insid
           <button class="btn" type="button" data-reset>Reset</button>
           <button class="btn btn-run" type="button">▶ Run</button>
         </div>
-        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 5">x = np.linspace(0, 16, 4000)
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 5">import matplotlib.pyplot as plt
+
+x = np.linspace(0, 16, 4000)
 fig, ax = plt.subplots()
 
 for t in (4, 8, 12):
@@ -329,7 +334,9 @@ for fix in (False, True):
           <button class="btn" type="button" data-reset>Reset</button>
           <button class="btn btn-run" type="button">▶ Run</button>
         </div>
-        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 6">chi   = -5.0                 # try +5.0 for Figure 2
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 6">import matplotlib.pyplot as plt
+
+chi   = -5.0                 # try +5.0 for Figure 2
 clip  = 9.0                  # Maple's axis stopped here
 
 xs = np.linspace(-25, 5, 260) if chi < 0 else np.linspace(-8, 0, 260)
@@ -366,7 +373,9 @@ ax.view_init(elev=26, azim=-56)</textarea>
           <button class="btn" type="button" data-reset>Reset</button>
           <button class="btn btn-run" type="button">▶ Run</button>
         </div>
-        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 7">P, S, R, chi = 3.0, 2.0, 3.0, -5.0
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 7">import matplotlib.pyplot as plt
+
+P, S, R, chi = 3.0, 2.0, 3.0, -5.0
 q = -chi
 
 # where each part of delta vanishes, for REAL argument a
@@ -426,7 +435,9 @@ ax.set_title("No pole: $\\delta$ passes smoothly through $\\xi_0$")</textarea>
           <button class="btn" type="button" data-reset>Reset</button>
           <button class="btn btn-run" type="button">▶ Run</button>
         </div>
-        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 8"># Peak amplitude against oblique angle — the trend behind Figures 5 and 6.
+        <textarea class="editor" spellcheck="false" aria-label="Python code, cell 8">import matplotlib.pyplot as plt
+
+# Peak amplitude against oblique angle — the trend behind Figures 5 and 6.
 angles = np.arange(5, 86, 2.5)
 peaks  = []
 x = np.linspace(0, 10, 1500)
